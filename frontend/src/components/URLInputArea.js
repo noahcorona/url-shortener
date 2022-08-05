@@ -1,20 +1,28 @@
 import {Button, Form, InputGroup} from 'react-bootstrap';
 import {useState} from 'react';
 import {FaClipboard} from 'react-icons/fa';
+import isURL from 'validator/lib/isURL';
 
 const URLInputArea = (props) => {
   const [inputURL, setInputURL] = useState('');
   const [inputLifespan, setInputLifespan] = useState('0');
+  const [error, setError] = useState(null);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // eslint-disable-next-line react/prop-types
-    props.setFormValues({url: inputURL, lifespan: inputLifespan});
-    const shortURLArea = document.getElementById('short-url-area');
-    window.scrollTo({
-      top: shortURLArea.offsetTop,
-      behavior: 'smooth',
-    });
+
+    if (isURL(inputURL)) {
+      // eslint-disable-next-line react/prop-types
+      props.setFormValues({url: inputURL, lifespan: inputLifespan});
+      const shortURLArea = document.getElementById('short-url-area');
+      window.scrollTo({
+        top: shortURLArea.offsetTop,
+        behavior: 'smooth',
+      });
+    } else {
+      setInputURL('');
+      setError('The URL entered was not valid');
+    }
   };
 
   const clickHandler = async (e) => {
@@ -77,6 +85,9 @@ const URLInputArea = (props) => {
             </Button>
           </InputGroup>
         </div>
+        {
+          error && <p className="error-text">{error}</p>
+        }
       </Form>
     </div>
   );

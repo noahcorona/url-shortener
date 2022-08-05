@@ -209,3 +209,9 @@
   align-self: center;
   text-align: center;
 }
+
+.error-text {
+  font-size: 0.75em;
+  color: #d36666;
+  text-align: right;
+}
