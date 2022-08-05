@@ -1,13 +1,13 @@
 import {FaGithub} from "react-icons/fa";
 import {SiBuymeacoffee} from "react-icons/si";
 
-const Navigation = ({onDocClick}) => {
+const StandardNav = ({onDocClick}) => {
     return (
         <div className="Navigation">
             <div className="Navigation-Content">
                 <div>
                     <a
-                        href="#"
+                        href="frontend/src/components/navigation/Navigation#StandardNav.js"
                         className="Navigation-Link"
                     >
                         smlr
@@ -17,14 +17,14 @@ const Navigation = ({onDocClick}) => {
                 <div className="Navigation-Button-Area">
                     <a
                         className="Navigation-Button"
-                        href="#"
+                        href="frontend/src/components/navigation/Navigation#StandardNav.js"
                         onClick={onDocClick}
                     >
                         API
                     </a>
                     <a
                         className="Navigation-Button-Icon"
-                        href="https://github.com/noahcorona/url-shortener/"
+                        href="https://github.com/noahcorona/url-shortener"
                     >
                         <FaGithub />
                     </a>
@@ -40,4 +40,4 @@ const Navigation = ({onDocClick}) => {
     )
 }
 
-export default Navigation;
+export default StandardNav;

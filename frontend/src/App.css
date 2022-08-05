@@ -92,6 +92,23 @@
   color: #ccc;
 }
 
+.navbar-toggler {
+  margin-right: 10px
+}
+
+.navbar-collapse {
+  text-align: right;
+  padding: 1em;
+}
+
+.Brand-Items b {
+  margin-left: 10px;
+}
+
+.Brand-Items p {
+  margin: 10px;
+}
+
 .Content {
   background-color: #222;
   min-height: 100vh;

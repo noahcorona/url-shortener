@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {useEffect, useState} from "react";
 import ResponseArea from "./components/ResponseArea";
 import URLInputArea from "./components/URLInputArea";
-import Navigation from "./components/Navigation";
+import Navigation from "./components/navigation/Navigation";
 import DocModal from "./components/DocModal";
 
 function App() {
@@ -26,7 +26,10 @@ function App() {
                         show={modalShowing}
                         handleClose={() => setModalShowing(false)}
                     />
-                    <Navigation onDocClick={() => setModalShowing(true)} />
+                    <Navigation onDocClick={(e) => {
+                        e.preventDefault();
+                        setModalShowing(true)
+                    }} />
                     <URLInputArea setLastInput={setLastInput} />
                     {lastResponse &&
                         <ResponseArea
