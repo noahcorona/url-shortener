@@ -154,7 +154,27 @@
   background-color: #888;
 }
 
+.paste-button {
+  padding-left: 0.75em;
+  padding-right: 0.5em;
+  background-color: #ccc;
+  color: #fff;
+  border: none;
+  border-top-right-radius: 0.25em;
+  border-bottom-right-radius: 0.25em;
+  align-content: center;
+  justify-content: center;
+  font-size: 14pt;
+}
+
+.paste-icon {
+  font-size: 1.25em;
+  padding-bottom: 0.175em;
+}
+
 .shorten-button {
+  margin: auto;
+  padding: 0;
   color: #fff;
   background-color: #888;
 }

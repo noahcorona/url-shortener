@@ -1,9 +1,9 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useEffect, useState} from 'react';
-import ResponseArea from './components/ResponseArea';
+import ShortURLArea from './components/ShortURLArea';
 import URLInputArea from './components/URLInputArea';
-import Navigation from './components/navigation/Navigation';
+import Navigation from './components/Navigation';
 import DocModal from './components/DocModal';
 import axios from 'axios';
 
@@ -81,7 +81,7 @@ function App() {
         <div className="Content-Body">
           <URLInputArea setLastInput={setFormValues} />
           {shortenedURL && (
-            <ResponseArea
+            <ShortURLArea
               copyText={'test'}
               originalURL={'https://test.com/'}
               lifespan={'Forever'}

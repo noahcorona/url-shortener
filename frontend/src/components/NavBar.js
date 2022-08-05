@@ -2,7 +2,7 @@ import {FaGithub} from 'react-icons/fa';
 import {SiBuymeacoffee} from 'react-icons/si';
 
 // eslint-disable-next-line react/prop-types
-const StandardNav = ({onDocClick}) => {
+const NavBar = ({onDocClick}) => {
   return (
     <div className="Navigation">
       <div className="Navigation-Content">
@@ -41,4 +41,4 @@ const StandardNav = ({onDocClick}) => {
   );
 };
 
-export default StandardNav;
+export default NavBar;

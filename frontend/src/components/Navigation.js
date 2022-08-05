@@ -1,6 +1,6 @@
 import {BrowserView, MobileView} from 'react-device-detect';
-import StandardNav from './StandardNav';
-import HamburgerNav from './HamburgerNav';
+import NavBar from './NavBar';
+import ExpandingNavBar from './ExpandingNavBar';
 import {useEffect, useState} from 'react';
 
 // eslint-disable-next-line require-jsdoc
@@ -30,12 +30,12 @@ const Navigation = ({onDocClick}) => {
     <>
       <BrowserView>
         {windowSize.innerWidth <= 600 ?
-            <HamburgerNav isOnBottom={false} onDocClick={onDocClick}/> :
-            <StandardNav onDocClick={onDocClick}/>
+            <ExpandingNavBar isOnBottom={false} onDocClick={onDocClick}/> :
+            <NavBar onDocClick={onDocClick}/>
         }
       </BrowserView>
       <MobileView>
-        <HamburgerNav isOnBottom={true} onDocClick={onDocClick} />
+        <ExpandingNavBar isOnBottom={true} onDocClick={onDocClick} />
       </MobileView>
     </>
   );

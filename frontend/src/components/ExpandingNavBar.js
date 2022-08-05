@@ -3,7 +3,7 @@ import {FaGithub} from 'react-icons/fa';
 import {SiBuymeacoffee} from 'react-icons/si';
 
 // eslint-disable-next-line react/prop-types
-const HamburgerNav = ({isOnBottom, onDocClick}) => {
+const ExpandingNavBar = ({isOnBottom, onDocClick}) => {
   return (
     <Navbar
       collapseOnSelect
@@ -33,4 +33,4 @@ const HamburgerNav = ({isOnBottom, onDocClick}) => {
   );
 };
 
-export default HamburgerNav;
+export default ExpandingNavBar;

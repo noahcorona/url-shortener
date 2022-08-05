@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {Button, Form} from 'react-bootstrap';
 
 // eslint-disable-next-line react/prop-types
-const ResponseArea = ({copyText, originalURL, lifespan}) => {
+const ShortURLArea = ({copyText, originalURL, lifespan}) => {
   const [copied, setCopied] = useState(false);
 
   const handleFocus = (event) => event.target.select();
@@ -56,6 +56,7 @@ const ResponseArea = ({copyText, originalURL, lifespan}) => {
             type="text"
             value={copyText}
             readOnly
+            selectTextOnFocus
           />
           <Button className="btn-light" onClick={handleCopyClick}>
             <span>
@@ -68,4 +69,4 @@ const ResponseArea = ({copyText, originalURL, lifespan}) => {
   );
 };
 
-export default ResponseArea;
+export default ShortURLArea;
