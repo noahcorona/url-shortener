@@ -1,12 +1,13 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Button, Form} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import ResponseArea from "./components/ResponseArea";
 import URLInputArea from "./components/URLInputArea";
 import Navigation from "./components/Navigation";
+import DocModal from "./components/DocModal";
 
 function App() {
+    const [modalShowing, setModalShowing] = useState(false);
     const [lastInput, setLastInput] = useState(null);
     const [lastResponse, setLastResponse] = useState(null);
 
@@ -21,7 +22,11 @@ function App() {
         <div className="App">
             <div className="Content">
                 <div className="Content-Body">
-                    <Navigation />
+                    <DocModal
+                        show={modalShowing}
+                        handleClose={() => setModalShowing(false)}
+                    />
+                    <Navigation onDocClick={() => setModalShowing(true)} />
                     <URLInputArea setLastInput={setLastInput} />
                     {lastResponse &&
                         <ResponseArea

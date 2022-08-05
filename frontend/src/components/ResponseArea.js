@@ -55,7 +55,7 @@ const ResponseArea = ({copyText, originalURL, lifespan}) => {
                         readOnly
                     />
                     <Button className="btn-light" onClick={handleCopyClick}>
-                        <span>{copied ? 'Copied' : 'Copy'}</span>
+                        <span>{copied ? 'Copied to Clipboard' : 'Click to Copy'}</span>
                     </Button>
                 </div>
             </div>

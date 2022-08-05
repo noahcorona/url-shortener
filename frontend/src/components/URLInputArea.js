@@ -34,11 +34,12 @@ const URLInputArea = (props) => {
                         }}
                     >
                         <option value="0">Forever</option>
-                        <option value="1">1 day</option>
-                        <option value="2">1 week</option>
-                        <option value="3">1 month</option>
-                        <option value="4">6 months</option>
-                        <option value="5">1 year</option>
+                        <option value="1">A year</option>
+                        <option value="2">6 months</option>
+                        <option value="3">3 months</option>
+                        <option value="4">A month</option>
+                        <option value="5">A Week</option>
+                        <option value="6">A Day</option>
                     </Form.Select>
                     <Button
                         type="submit"

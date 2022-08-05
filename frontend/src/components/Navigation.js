@@ -1,21 +1,39 @@
-import {Button} from "react-bootstrap";
+import {FaGithub} from "react-icons/fa";
+import {SiBuymeacoffee} from "react-icons/si";
 
-const Navigation = () => {
+const Navigation = ({onDocClick}) => {
     return (
         <div className="Navigation">
             <div className="Navigation-Content">
-                <a
-                    href="#"
-                    className="Navigation-Link"
-                >
-                    smlr.org
-                </a>
                 <div>
-                    <button
-                        className="Navigation-Button"
+                    <a
+                        href="#"
+                        className="Navigation-Link"
                     >
-                        API documentation
-                    </button>
+                        smlr
+                    </a>
+                    <p>Sometimes, smaller is better</p>
+                </div>
+                <div className="Navigation-Button-Area">
+                    <a
+                        className="Navigation-Button"
+                        href="#"
+                        onClick={onDocClick}
+                    >
+                        API
+                    </a>
+                    <a
+                        className="Navigation-Button-Icon"
+                        href="https://github.com/noahcorona/url-shortener/"
+                    >
+                        <FaGithub />
+                    </a>
+                    <a
+                        className="Navigation-Button-Icon"
+                        href="https://buymeacoffee.com/4IeSH91kr"
+                    >
+                        <SiBuymeacoffee />
+                    </a>
                 </div>
             </div>
         </div>
