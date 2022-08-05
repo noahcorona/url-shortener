@@ -1,25 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Button, Form} from "react-bootstrap";
+import {useEffect, useState} from "react";
+import ResponseArea from "./components/ResponseArea";
+import URLInputArea from "./components/URLInputArea";
+import Navigation from "./components/Navigation";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [lastInput, setLastInput] = useState(null);
+    const [lastResponse, setLastResponse] = useState(null);
+
+    useEffect(() => {
+        if(lastInput) {
+            setLastResponse(lastInput);
+            console.log(lastInput);
+        }
+    }, [lastInput]);
+
+    return (
+        <div className="App">
+            <div className="Content">
+                <Navigation />
+                <URLInputArea setLastInput={setLastInput} />
+                {lastResponse &&
+                    <ResponseArea
+                        copyText={"test"}
+                        originalURL={"https://test.com/"}
+                        lifespan={"Forever"}
+                    />
+                }
+            </div>
+        </div>
+    );
 }
 
 export default App;

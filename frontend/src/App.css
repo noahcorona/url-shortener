@@ -1,19 +1,42 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App b {
+  margin-bottom: 1em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.App p {
+  text-align: left;
+  margin-bottom: 1em;
 }
 
-.App-header {
+.Navigation {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #222;
+}
+
+.Navigation-Content {
+  margin: 0 auto;
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+  width: 75vh;
+  min-width: 350px;
+  max-width: 800px;
+}
+
+.Navigation-Link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  margin-right: 1.5em;
+}
+
+.Content {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -24,15 +47,40 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.btn {
+  margin-left: 1em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.form-select {
+  margin-left: 1em;
+}
+
+.url-form {
+  max-width: 600px;
+  min-width: 300px;
+  width: 60vw;
+  display: flex;
+  margin-bottom: 1em;
+}
+
+.divider {
+  width: 75vh;
+  min-width: 350px;
+  max-width: 800px;
+  margin-top: 1em;
+  margin-bottom: 2em;
+  align-self: center;
+  justify-self: center;
+  height: 1px;
+  background-color: #888;
+}
+
+.shorten-button {
+  color: #fff;
+  background-color: #888;
+}
+
+.Link {
+  color: #ffffff;
+  text-align: left;
 }
