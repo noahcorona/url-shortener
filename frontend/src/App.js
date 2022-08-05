@@ -79,7 +79,7 @@ function App() {
           }}
         />
         <div className="Content-Body">
-          <div className="Content-Scrollable">
+          <div className="Content-Centered">
             <URLInputArea setFormValues={setFormValues} />
             {shortenedURL && (
               <ShortURLArea

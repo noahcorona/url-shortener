@@ -27,7 +27,7 @@ const URLInputArea = (props) => {
   return (
     <div
       id="url-input-area"
-      className="url-input-area"
+      className="Content-Card"
     >
       <b>Enter a URL</b>
       <p>A smlr.org link and QR code will be created</p>
@@ -35,7 +35,7 @@ const URLInputArea = (props) => {
         className="url-form"
         onSubmit={submitHandler}
       >
-        <div className="form-control-wrapper">
+        <div className="bottom-spaced">
           <InputGroup>
             <Form.Control
               id="url"
@@ -47,33 +47,33 @@ const URLInputArea = (props) => {
               value={inputURL}
             />
             <Button
+              variant="success"
               onClick={clickHandler}
             >
-              Paste <FaClipboard className="paste-icon" />
+              Paste <FaClipboard className="button-icon" />
             </Button>
           </InputGroup>
         </div>
-        <div className="form-select-wrapper">
+        <div className="bottom-spaced">
           <InputGroup>
             <Form.Select
               aria-label="Default select example"
               id="lifespan"
-              onChange={(e) => {
-                setInputLifespan(e.target.value);
-              }}
+              onChange={(e) => setInputLifespan(e.target.value)}
             >
               <option value="0">Forever</option>
               <option value="1 year">A year</option>
               <option value="6 months">6 months</option>
               <option value="3 months">3 months</option>
               <option value="1 month">A month</option>
-              <option value="1 week">A Week</option>
-              <option value="1 day">A Day</option>
+              <option value="1 week">A week</option>
+              <option value="1 day">A day</option>
             </Form.Select>
             <Button
               type="submit"
+              variant="success"
             >
-                Create link
+              Create link
             </Button>
           </InputGroup>
         </div>

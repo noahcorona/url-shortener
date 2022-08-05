@@ -43,7 +43,7 @@ const ShortURLArea = ({shortURL, originalURL, lifespan}) => {
   return (
     <div
       id="short-url-area"
-      className="url-input-area"
+      className="Content-Card"
     >
       <b>
         <a
@@ -54,22 +54,23 @@ const ShortURLArea = ({shortURL, originalURL, lifespan}) => {
         >
           {originalURL}
         </a>
-      </b>
-      <p>
-        {/* eslint-disable-next-line react/prop-types */}
-            This link&apos;s lifespan is set to {getLifespanText()}
-      </p>
-      <p>
-        To: <a
+        {' > '}
+        <a
           className="Link"
           href="#"
           target="_blank"
           rel="noopener noreferrer"
         >
-          {originalURL}
+          {shortURL}
         </a>
+      </b>
+      <p>
+        {/* eslint-disable-next-line react/prop-types */}
+        {getLifespanText() === 'forever' ?
+            'This link has no expiration date' :
+            'This link expires in ' + getLifespanText()}
       </p>
-      <div className='url-form'>
+      <div className='bottom-spaced'>
         <InputGroup>
           <Form.Control
             onFocus={handleFocus}
@@ -78,21 +79,29 @@ const ShortURLArea = ({shortURL, originalURL, lifespan}) => {
             readOnly
             selectTextOnFocus
           />
-          <Button className="paste-button" onClick={handleCopyClick}>
+          <Button
+            variant="success"
+            className="paste-button"
+            onClick={handleCopyClick}
+          >
             {copied ? 'Copied to Clipboard' : (
-                  <>Copy<FaClipboard className="paste-icon" /></>
+                  <>Copy<FaClipboard className="button-icon" /></>
               )}
           </Button>
         </InputGroup>
       </div>
       <div className="QR-Area d-grid gap-2">
         <QRCode
+          className="centered"
           value={shortURL}
           alt={shortURL}
         />
-        <Button>
+        <Button
+          variant="success"
+          className="d-block"
+        >
             Copy image
-          <FaClipboard className="paste-icon" />
+          <FaClipboard className="button-icon" />
         </Button>
       </div>
     </div>

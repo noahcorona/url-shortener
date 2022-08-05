@@ -1,4 +1,4 @@
-import {FaGithub} from 'react-icons/fa';
+import {FaBook, FaGithub} from 'react-icons/fa';
 import {SiBuymeacoffee} from 'react-icons/si';
 
 // eslint-disable-next-line react/prop-types
@@ -11,9 +11,9 @@ const NavBar = ({onDocClick}) => {
             href="#"
             className="Navigation-Link"
           >
-                        smlr
+            smlr
           </a>
-          <p>Sometimes, smaller is better</p>
+          <p>Sometimes, smaller <i>is</i> better</p>
         </div>
         <div className="Navigation-Button-Area">
           <a
@@ -21,19 +21,19 @@ const NavBar = ({onDocClick}) => {
             href="#"
             onClick={onDocClick}
           >
-                        API
+            API <FaBook className="Navigation-Button-Icon-Alt" />
           </a>
           <a
             className="Navigation-Button-Icon"
             href="https://github.com/noahcorona/url-shortener"
           >
-            <FaGithub />
+            <FaGithub className="Navigation-Button-Icon" />
           </a>
           <a
             className="Navigation-Button-Icon"
             href="https://buymeacoffee.com/4IeSH91kr"
           >
-            <SiBuymeacoffee />
+            <SiBuymeacoffee className="Navigation-Button-Icon" />
           </a>
         </div>
       </div>

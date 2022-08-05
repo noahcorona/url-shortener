@@ -1,5 +1,5 @@
 import {Nav, Navbar} from 'react-bootstrap';
-import {FaGithub} from 'react-icons/fa';
+import {FaBook, FaGithub} from 'react-icons/fa';
 import {SiBuymeacoffee} from 'react-icons/si';
 
 // eslint-disable-next-line react/prop-types
@@ -7,25 +7,30 @@ const ExpandingNavBar = ({isOnBottom, onDocClick}) => {
   return (
     <Navbar
       collapseOnSelect
-      bg="light"
+      bg="dark"
       expand="lg"
-      variant="light"
+      variant="dark"
     >
       <Navbar.Brand href="#">
         <span className="Brand-Items">
           <b>smlr</b>
-          <p>sometimes, smaller is better</p>
+          <p>sometimes, smaller <i>is</i> better</p>
         </span>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="#" onClick={onDocClick}>API Documentation</Nav.Link>
+          <Nav.Link href="#" onClick={onDocClick}>
+            API Documentation
+            <FaBook className="Expanding-Nav-Link-Icon" />
+          </Nav.Link>
           <Nav.Link href="https://github.com/noahcorona/url-shortener">
-            Source code  <FaGithub />
+            Source code
+            <FaGithub className="Expanding-Nav-Link-Icon" />
           </Nav.Link>
           <Nav.Link href="https://buymeacoffee.com/4IeSH91kr">
-            Support the developer  <SiBuymeacoffee />
+            Support the developer
+            <SiBuymeacoffee className="Expanding-Nav-Link-Icon" />
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>
