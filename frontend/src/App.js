@@ -20,15 +20,17 @@ function App() {
     return (
         <div className="App">
             <div className="Content">
-                <Navigation />
-                <URLInputArea setLastInput={setLastInput} />
-                {lastResponse &&
-                    <ResponseArea
-                        copyText={"test"}
-                        originalURL={"https://test.com/"}
-                        lifespan={"Forever"}
-                    />
-                }
+                <div className="Content-Body">
+                    <Navigation />
+                    <URLInputArea setLastInput={setLastInput} />
+                    {lastResponse &&
+                        <ResponseArea
+                            copyText={"test"}
+                            originalURL={"https://test.com/"}
+                            lifespan={"Forever"}
+                        />
+                    }
+                </div>
             </div>
         </div>
     );

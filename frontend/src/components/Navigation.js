@@ -11,16 +11,11 @@ const Navigation = () => {
                     smlr.org
                 </a>
                 <div>
-                    <Button
-                        className="btn-light"
-                    >
-                        URL shortener
-                    </Button>
-                    <Button
-                        className="btn-light"
+                    <button
+                        className="Navigation-Button"
                     >
                         API documentation
-                    </Button>
+                    </button>
                 </div>
             </div>
         </div>

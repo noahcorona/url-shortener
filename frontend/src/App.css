@@ -21,10 +21,10 @@
 
 .Navigation-Content {
   margin: 0 auto;
-  padding: 1em;
+  padding: 1em 0;
   display: flex;
   justify-content: space-between;
-  width: 75vh;
+  width: 75%;
   min-width: 350px;
   max-width: 800px;
 }
@@ -34,10 +34,31 @@
   text-decoration: none;
   font-weight: bold;
   margin-right: 1.5em;
+  padding: 10px 0.5em;
+}
+
+.Navigation-Link:visited {
+  color: #fff;
+}
+
+.Navigation-Link:hover {
+  color: #fff;
+}
+
+.Navigation-Button {
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  border-radius: 0.25em;
+  padding: 10px 0.5em;
+}
+
+.Navigation-Button:hover {
+  background-color: #333;
 }
 
 .Content {
-  background-color: #282c34;
+  background-color: #222;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -45,6 +66,13 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.Content-Body {
+  width: 75%;
+  min-width: 350px;
+  max-width: 800px;
+  padding: 0.5em;
 }
 
 .btn {
@@ -56,18 +84,14 @@
 }
 
 .url-form {
-  max-width: 600px;
-  min-width: 300px;
-  width: 60vw;
   display: flex;
   margin-bottom: 1em;
 }
 
 .divider {
-  width: 75vh;
-  min-width: 350px;
-  max-width: 800px;
-  margin-top: 1em;
+  width: 120%;
+  margin-left: -10%;
+  margin-top: 2em;
   margin-bottom: 2em;
   align-self: center;
   justify-self: center;
