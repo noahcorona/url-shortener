@@ -13,9 +13,11 @@
 
 .Navigation {
   width: 100%;
+  position: sticky;
+  top: 0;
   background-color: #151515;
   border-bottom: 1px #444 solid;
-  margin-bottom: 2em;
+  font-size: calc(10px + 2vh);
 }
 
 .Navigation-Content {
@@ -109,37 +111,31 @@
 
 .Content {
   background-color: #222;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
   font-size: 1.5em;
   color: white;
 }
 
-.Content-Body {
-  align-self: center;
+.Content-Scrollable {
+  margin: auto;
   width: 75%;
   min-width: 350px;
   max-width: 800px;
   padding: 0.5em;
-  overflow-y: scroll;
 }
 
-.btn {
-  margin-left: 1em;
+.form-select-wrapper {
+  margin-bottom: 1em;
 }
 
-.form-select {
-  margin-left: 1em;
-  flex: 1;
+.form-control-wrapper {
+  margin-bottom: 1em;
 }
 
 .form-control {
-  flex: 2;
+
 }
 
 .url-form {
-  display: flex;
   margin-bottom: 1em;
 }
 
@@ -170,10 +166,11 @@
 .paste-icon {
   font-size: 1.25em;
   padding-bottom: 0.175em;
+  margin-left: 0.5em;
 }
 
 .shorten-button {
-  margin: auto;
+  margin: auto auto auto 1em;
   padding: 0;
   color: #fff;
   background-color: #888;
@@ -186,4 +183,21 @@
 
 .Link:hover {
   color: #ccc;
+}
+
+.QR-Area {
+  background-color: rgba(255, 255, 255, 0.05);
+  margin-bottom: 2em;
+  border-radius: 0.5em;
+  width: fit-content;
+  padding: 1em;
+}
+
+.url-input-area {
+  background-color: rgba(255, 255, 255, 0.05);
+  margin-top: 2em;
+  margin-bottom: 2em;
+  border-radius: 0.5em;
+  width: 100%;
+  padding: 1em;
 }

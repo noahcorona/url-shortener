@@ -35,7 +35,7 @@ function App() {
     }
 
     if (formValues) {
-      getShortURL(formValues)
+      getShortURL(formValues.url, formValues.lifespan)
           .then((res) => {
             console.log('API response: ', res);
           })
@@ -79,14 +79,16 @@ function App() {
           }}
         />
         <div className="Content-Body">
-          <URLInputArea setLastInput={setFormValues} />
-          {shortenedURL && (
-            <ShortURLArea
-              copyText={'test'}
-              originalURL={'https://test.com/'}
-              lifespan={'Forever'}
-            />
-          )}
+          <div className="Content-Scrollable">
+            <URLInputArea setFormValues={setFormValues} />
+            {shortenedURL && (
+              <ShortURLArea
+                shortURL={shortenedURL}
+                originalURL={formValues.url}
+                lifespan={formValues.lifespan}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>

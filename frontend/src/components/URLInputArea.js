@@ -9,7 +9,12 @@ const URLInputArea = (props) => {
   const submitHandler = (e) => {
     e.preventDefault();
     // eslint-disable-next-line react/prop-types
-    props.setLastInput({inputURL, inputLifespan});
+    props.setFormValues({url: inputURL, lifespan: inputLifespan});
+    const shortURLArea = document.getElementById('short-url-area');
+    window.scrollTo({
+      top: shortURLArea.offsetTop,
+      behavior: 'smooth',
+    });
   };
 
   const clickHandler = async (e) => {
@@ -20,14 +25,17 @@ const URLInputArea = (props) => {
   };
 
   return (
-    <>
-      <div>
-        <b>Enter a URL</b>
-        <p>If desired, choose a lifespan for the link</p>
-        <Form
-          className="url-form"
-          onSubmit={submitHandler}
-        >
+    <div
+      id="url-input-area"
+      className="url-input-area"
+    >
+      <b>Enter a URL</b>
+      <p>A smlr.org link and QR code will be created</p>
+      <Form
+        className="url-form"
+        onSubmit={submitHandler}
+      >
+        <div className="form-control-wrapper">
           <InputGroup>
             <Form.Control
               id="url"
@@ -39,12 +47,13 @@ const URLInputArea = (props) => {
               value={inputURL}
             />
             <Button
-              bsPrefix="paste-button"
               onClick={clickHandler}
             >
               Paste <FaClipboard className="paste-icon" />
             </Button>
           </InputGroup>
+        </div>
+        <div className="form-select-wrapper">
           <InputGroup>
             <Form.Select
               aria-label="Default select example"
@@ -61,16 +70,15 @@ const URLInputArea = (props) => {
               <option value="1 week">A Week</option>
               <option value="1 day">A Day</option>
             </Form.Select>
+            <Button
+              type="submit"
+            >
+                Create link
+            </Button>
           </InputGroup>
-          <Button
-            type="submit"
-            className="btn-toolbar"
-          >
-              Shorten
-          </Button>
-        </Form>
-      </div>
-    </>
+        </div>
+      </Form>
+    </div>
   );
 };
 

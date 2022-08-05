@@ -1,14 +1,16 @@
 import {useState} from 'react';
-import {Button, Form} from 'react-bootstrap';
+import {Button, Form, InputGroup} from 'react-bootstrap';
+import QRCode from 'react-qr-code';
+import {FaClipboard} from 'react-icons/fa';
 
 // eslint-disable-next-line react/prop-types
-const ShortURLArea = ({copyText, originalURL, lifespan}) => {
+const ShortURLArea = ({shortURL, originalURL, lifespan}) => {
   const [copied, setCopied] = useState(false);
 
   const handleFocus = (event) => event.target.select();
 
   const handleCopyClick = () => {
-    copyTextToClipboard(copyText)
+    copyTextToClipboard(shortURL)
         .then(() => {
           setCopied(true);
           setTimeout(() => {
@@ -29,43 +31,71 @@ const ShortURLArea = ({copyText, originalURL, lifespan}) => {
     }
   }
 
+  // eslint-disable-next-line require-jsdoc
+  function getLifespanText() {
+    if (lifespan === '0') {
+      return 'forever';
+    } else {
+      return lifespan;
+    }
+  }
+
   return (
-    <>
-      <div className='divider' />
-      <div>
-        <b>
-          <a
-            className="Link"
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-              https://smlr.org/yourlink
-          </a>
-        </b>
-        <p>
-          {/* eslint-disable-next-line react/prop-types */}
-            This link&apos;s lifespan is set to {lifespan.toLowerCase()}
-        </p>
-        <p>
-            URL destination: {originalURL}
-        </p>
-        <div className='url-form'>
+    <div
+      id="short-url-area"
+      className="url-input-area"
+    >
+      <b>
+        <a
+          className="Link"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {originalURL}
+        </a>
+      </b>
+      <p>
+        {/* eslint-disable-next-line react/prop-types */}
+            This link&apos;s lifespan is set to {getLifespanText()}
+      </p>
+      <p>
+        To: <a
+          className="Link"
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {originalURL}
+        </a>
+      </p>
+      <div className='url-form'>
+        <InputGroup>
           <Form.Control
             onFocus={handleFocus}
             type="text"
-            value={copyText}
+            value={shortURL}
             readOnly
             selectTextOnFocus
           />
-          <Button className="btn-light" onClick={handleCopyClick}>
-            <span>
-              {copied ? 'Copied to Clipboard' : 'Click to Copy'}
-            </span>
+          <Button className="paste-button" onClick={handleCopyClick}>
+            {copied ? 'Copied to Clipboard' : (
+                  <>Copy<FaClipboard className="paste-icon" /></>
+              )}
           </Button>
-        </div>
+        </InputGroup>
       </div>
-    </>
+      <div className="QR-Area d-grid gap-2">
+        <QRCode
+          value={shortURL}
+          alt={shortURL}
+        />
+        <Button>
+            Copy image
+          <FaClipboard className="paste-icon" />
+        </Button>
+      </div>
+    </div>
   );
 };
 

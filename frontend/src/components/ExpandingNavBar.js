@@ -20,12 +20,12 @@ const ExpandingNavBar = ({isOnBottom, onDocClick}) => {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="#" onClick={onDocClick}>API</Nav.Link>
+          <Nav.Link href="#" onClick={onDocClick}>API Documentation</Nav.Link>
           <Nav.Link href="https://github.com/noahcorona/url-shortener">
-            <FaGithub />
+            Source code  <FaGithub />
           </Nav.Link>
           <Nav.Link href="https://buymeacoffee.com/4IeSH91kr">
-            <SiBuymeacoffee />
+            Support the developer  <SiBuymeacoffee />
           </Nav.Link>
         </Nav>
       </Navbar.Collapse>

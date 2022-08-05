@@ -27,7 +27,7 @@ const Navigation = ({onDocClick}) => {
   }, []);
 
   return (
-    <>
+    <div>
       <BrowserView>
         {windowSize.innerWidth <= 600 ?
             <ExpandingNavBar isOnBottom={false} onDocClick={onDocClick}/> :
@@ -37,7 +37,7 @@ const Navigation = ({onDocClick}) => {
       <MobileView>
         <ExpandingNavBar isOnBottom={true} onDocClick={onDocClick} />
       </MobileView>
-    </>
+    </div>
   );
 };
 
