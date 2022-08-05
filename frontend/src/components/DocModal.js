@@ -1,6 +1,5 @@
 import {Button, Modal} from 'react-bootstrap';
 
-// eslint-disable-next-line react/prop-types
 const DocModal = ({show, handleClose}) => {
   return (
     <Modal

@@ -3,7 +3,6 @@ import {Button, Form, InputGroup} from 'react-bootstrap';
 import QRCode from 'react-qr-code';
 import {FaClipboard} from 'react-icons/fa';
 
-// eslint-disable-next-line react/prop-types
 const ShortURLArea = ({shortURL, originalURL, lifespan}) => {
   const [copied, setCopied] = useState(false);
 
@@ -22,7 +21,11 @@ const ShortURLArea = ({shortURL, originalURL, lifespan}) => {
         });
   };
 
-  // eslint-disable-next-line require-jsdoc
+  /**
+   *
+   * @param {string} text - the text to copy
+   * @return {Promise<boolean|void>} - boolean promise
+   */
   async function copyTextToClipboard(text) {
     if ('clipboard' in navigator) {
       return await navigator.clipboard.writeText(text);
@@ -31,7 +34,10 @@ const ShortURLArea = ({shortURL, originalURL, lifespan}) => {
     }
   }
 
-  // eslint-disable-next-line require-jsdoc
+  /**
+   * Convert lifespan value to appropriate text
+   * @return {string|*}
+   */
   function getLifespanText() {
     if (lifespan === '0') {
       return 'forever';
@@ -65,7 +71,6 @@ const ShortURLArea = ({shortURL, originalURL, lifespan}) => {
         </a>
       </b>
       <p>
-        {/* eslint-disable-next-line react/prop-types */}
         {getLifespanText() === 'forever' ?
             'This link has no expiration date' :
             'This link expires in ' + getLifespanText()}

@@ -7,7 +7,11 @@ import Navigation from './components/Navigation';
 import DocModal from './components/DocModal';
 import axios from 'axios';
 
-// eslint-disable-next-line require-jsdoc
+/**
+ * Entry point of our application
+ * @return {JSX.Element}
+ * @constructor
+ */
 function App() {
   const [modalShowing, setModalShowing] = useState(false);
   const [shortenedURL, setShortenedURL] = useState(null);
@@ -24,7 +28,12 @@ function App() {
        }
     */
 
-    // eslint-disable-next-line require-jsdoc
+    /**
+     * Fetch the shortened URL from the SMLR API using a GET request
+     * @param {string} url - the url to shorten
+     * @param {string} lifespan - the lifespan of the url
+     * @return {Promise<AxiosResponse<any>>} the API response with a JSON body
+     */
     async function getShortURL(url, lifespan) {
       return axios.get('/api', {
         params: {

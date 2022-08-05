@@ -2,7 +2,6 @@ import {Nav, Navbar} from 'react-bootstrap';
 import {FaBook, FaGithub} from 'react-icons/fa';
 import {SiBuymeacoffee} from 'react-icons/si';
 
-// eslint-disable-next-line react/prop-types
 const ExpandingNavBar = ({isOnBottom, onDocClick}) => {
   return (
     <Navbar

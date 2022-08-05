@@ -1,7 +1,6 @@
 import {FaBook, FaGithub} from 'react-icons/fa';
 import {SiBuymeacoffee} from 'react-icons/si';
 
-// eslint-disable-next-line react/prop-types
 const NavBar = ({onDocClick}) => {
   return (
     <div className="Navigation">

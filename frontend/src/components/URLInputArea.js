@@ -12,7 +12,6 @@ const URLInputArea = (props) => {
     e.preventDefault();
 
     if (isURL(inputURL)) {
-      // eslint-disable-next-line react/prop-types
       props.setFormValues({url: inputURL, lifespan: inputLifespan});
       const shortURLArea = document.getElementById('short-url-area');
       window.scrollTo({
