@@ -47,6 +47,7 @@ function App() {
             setShortenedURL(res.data.shortened);
           })
           .catch((error) => {
+            console.log('error making API request')
             if (error.response) {
             // The request was made and the server
             // responded with a status code
