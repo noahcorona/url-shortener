@@ -36,7 +36,7 @@ function App() {
      */
     async function getShortURL(url, lifespan) {
       return axios.post('/api', {
-        destination: url
+        destination: url,
       });
     }
 
