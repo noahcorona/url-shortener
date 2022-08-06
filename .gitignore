@@ -7,6 +7,7 @@ backend/node_modules
 */.vscode
 */*.swp
 */*.swo
+backend/secrets/*
 
 frontend/packages/react-devtools-core/dist
 frontend/packages/react-devtools-extensions/chrome/build
