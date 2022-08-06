@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const mongoCredentials = require('./secrets/mongoCredentials')
 
+// MongoDB connection
 const connectDB = async (port) => {
   try {
     await mongoose.connect(

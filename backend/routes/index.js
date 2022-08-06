@@ -2,7 +2,7 @@ const Express = require('express');
 const router = Express.Router();
 const urlDB = require('../models/URL');
 
-router.get('/:ext', async (req, res) => {
+router.get('/go/:ext', async (req, res) => {
   try {
     console.log(req.params.ext);
     const url = await urlDB.findOne({ ext: req.params.ext });

@@ -13,8 +13,9 @@ connectDB(MONGO_PORT);
 app.use(Express.urlencoded({ extended: true }));
 app.use(Express.json());
 
+// Routes
 app.use('/', require('./routes/index'));
-app.use('/api', require('./routes/createURL'));
+app.use('/', require('./routes/createURL'));
 
 app.listen(PORT, () => {
     console.log(`Server is running at PORT ${PORT}`);
