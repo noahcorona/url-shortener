@@ -54,7 +54,7 @@ function App() {
             });
           })
           .catch((error) => {
-            console.log('error making API request');
+            console.log('error making API request', error);
             if (error.response) {
             // The request was made and the server
             // responded with a status code
