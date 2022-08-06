@@ -33,6 +33,7 @@ const URLInputArea = (props) => {
 
   return (
     <div
+      data-testid="urlInputElement"
       id="url-input-area"
       className="Content-Card"
     >
