@@ -1,4 +1,5 @@
 const Express = require('express');
+const cors = require('cors');
 const app = Express();
 const connectDB = require('./db');
 
@@ -8,6 +9,9 @@ const MONGO_PORT = 27017;
 
 // Connect to MongoDB on the specified port
 connectDB(MONGO_PORT);
+
+// CORS middleware
+app.use(cors())
 
 // Body parser
 app.use(Express.urlencoded({ extended: true }));
