@@ -35,11 +35,8 @@ function App() {
      * @return {Promise<AxiosResponse<any>>} the API response with a JSON body
      */
     async function getShortURL(url, lifespan) {
-      return axios.get('/api', {
-        params: {
-          url: url,
-          lifespan: lifespan,
-        },
+      return axios.post('/api', {
+        destination: url
       });
     }
 
@@ -47,6 +44,7 @@ function App() {
       getShortURL(formValues.url, formValues.lifespan)
           .then((res) => {
             console.log('API response: ', res);
+            setShortenedURL(res.data.shortened);
           })
           .catch((error) => {
             if (error.response) {
@@ -69,8 +67,6 @@ function App() {
             }
             console.log(error.config);
           });
-
-      setShortenedURL('https://test.org/');
     }
   }, [formValues]);
 
