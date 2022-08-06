@@ -11,7 +11,7 @@ const MONGO_PORT = 27017;
 connectDB(MONGO_PORT);
 
 // CORS middleware
-app.use(cors())
+app.options('*', cors());
 
 // Body parser
 app.use(Express.urlencoded({ extended: true }));

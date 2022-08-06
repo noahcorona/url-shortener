@@ -44,7 +44,14 @@ function App() {
       getShortURL(formValues.url, formValues.lifespan)
           .then((res) => {
             console.log('API response: ', res);
+
+            // set state for shortened URL and scroll to its component
             setShortenedURL(res.data.shortened);
+            const shortURLArea = document.getElementById('short-url-area');
+            window.scrollTo({
+              top: shortURLArea.offsetTop,
+              behavior: 'smooth',
+            });
           })
           .catch((error) => {
             console.log('error making API request');

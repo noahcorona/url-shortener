@@ -13,11 +13,6 @@ const URLInputArea = (props) => {
 
     if (isURL(inputURL)) {
       props.setFormValues({url: inputURL, lifespan: inputLifespan});
-      const shortURLArea = document.getElementById('short-url-area');
-      window.scrollTo({
-        top: shortURLArea.offsetTop,
-        behavior: 'smooth',
-      });
     } else {
       setInputURL('');
       setError('The URL entered was not valid');
