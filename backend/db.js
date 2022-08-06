@@ -1,8 +1,11 @@
 const mongoose = require('mongoose');
+const mongoCredentials = require('./secrets/mongoCredentials')
 
 const connectDB = async (port) => {
   try {
-    await mongoose.connect('mongodb://localhost:' + port + '/urldb', {
+    await mongoose.connect(
+      'mongodb://' + mongoCredentials.username + ':' + mongoCredentials.password +
+      '@' + mongoCredentials.ip + ':' + port + '/urldb', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
