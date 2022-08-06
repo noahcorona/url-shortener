@@ -1,9 +1,9 @@
-const Express = require('Express');
+const Express = require('express');
 const app = Express();
 const connectDB = require('./db');
 
 // Specify ports for webserver and MongoDB
-const PORT = 3000;
+const PORT = 5000;
 const MONGO_PORT = 27017;
 
 // Connect to MongoDB on the specified port
