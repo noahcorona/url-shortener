@@ -35,7 +35,7 @@ function App() {
      * @return {Promise<AxiosResponse<any>>} the API response with a JSON body
      */
     async function getShortURL(url, lifespan) {
-      return axios.post('/api', {
+      return axios.post('/create', {
         destination: url,
       });
     }
