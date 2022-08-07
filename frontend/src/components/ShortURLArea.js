@@ -7,7 +7,7 @@ const ShortURLArea = ({status, linkData, setLinkData}) => {
   const {ext, originalURL, lifespan} = linkData;
   const [copied, setCopied] = useState(false);
 
-  const shortURL = 'https://smlr.org/go/' + ext;
+  const shortURL = 'https://smlr.org/' + ext;
 
   const handleFocus = (event) => event.target.select();
 
