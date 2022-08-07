@@ -50,7 +50,7 @@ const URLInputArea = (props) => {
               value={inputURL}
             />
             <Button
-              variant="success"
+              variant="secondary"
               onClick={clickHandler}
             >
               Paste <FaClipboard className="button-icon" />
@@ -74,7 +74,7 @@ const URLInputArea = (props) => {
             </Form.Select>
             <Button
               type="submit"
-              variant="success"
+              variant="secondary"
             >
               Create link
             </Button>

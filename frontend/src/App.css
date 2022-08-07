@@ -18,8 +18,8 @@
   width: 100%;
   position: sticky;
   top: 0;
-  background-color: #151515;
-  border-bottom: 1px #444 solid;
+  background-color: #de354c;
+  border-bottom: 1px #ccc solid;
   font-size: 1em;
 }
 
@@ -44,7 +44,7 @@
 }
 
 .Navigation p {
-  color: #ccc;
+  color: #ddd;
   font-size: 0.75em;
 }
 
@@ -136,9 +136,9 @@
  */
 
 .Content {
-  background-color: #222;
+  background-color: #f3f3f3;
   font-size: 1.5em;
-  color: white;
+  color: #555;
 }
 
 .Content-Centered {
@@ -150,7 +150,7 @@
 }
 
 .Content-Card {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(131, 99, 66, 0.1);
   margin-top: 2em;
   margin-bottom: 2em;
   border-radius: 0.5em;

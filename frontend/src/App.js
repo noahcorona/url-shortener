@@ -34,10 +34,21 @@ function App() {
      * @param {string} lifespan - the lifespan of the url
      * @return {Promise<AxiosResponse<any>>} the API response with a JSON body
      */
-    async function getShortURL(url, lifespan) {
-      return axios.post('/create', {
+    async function getShortURL(url) {
+      axios.post('/create', {
         destination: url,
+      }).then((response) => {
+        const {shortened, destination, ext, date, clicks} = response.data;
+
+        // handle the data here - for example...
+        console.log('The URL', destination,
+            'was shortened to', shortened,
+            'at', date,
+            'and was given an extension of', ext,
+            '. The short url has been used', clicks, 'times.');
       });
+
+      return shortenedURL;
     }
 
     if (formValues) {
