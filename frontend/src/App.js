@@ -41,11 +41,14 @@ function App() {
       // toggle waiting status
       setStatus('waiting');
       // make a POST request to the create API
-      axios.post(API_URL + '/create', {
-        destination: url,
-      }).then((response) => {
+      axios.post(
+          API_URL + '/create',
+          {
+            destination: url,
+          },
+      ).then((response) => {
         setLinkData({
-          shortURL: response.data.shortened,
+          ext: response.data.ext,
           originalURL: url,
           lifespan: lifespan,
         });

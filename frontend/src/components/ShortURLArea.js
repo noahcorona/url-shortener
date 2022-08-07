@@ -4,8 +4,10 @@ import QRCode from 'react-qr-code';
 import {FaClipboard} from 'react-icons/fa';
 
 const ShortURLArea = ({status, linkData, setLinkData}) => {
-  const {shortURL, originalURL, lifespan} = linkData;
+  const {ext, originalURL, lifespan} = linkData;
   const [copied, setCopied] = useState(false);
+
+  const shortURL = 'https://smlr.org/' + ext;
 
   const handleFocus = (event) => event.target.select();
 
@@ -56,7 +58,7 @@ const ShortURLArea = ({status, linkData, setLinkData}) => {
         <h3>
           <a
             className="Link"
-            href="#"
+            href={originalURL}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -65,7 +67,7 @@ const ShortURLArea = ({status, linkData, setLinkData}) => {
           {' > '}
           <a
             className="Link"
-            href="#"
+            href={shortURL}
             target="_blank"
             rel="noopener noreferrer"
           >
