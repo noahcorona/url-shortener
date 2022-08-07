@@ -1,6 +1,5 @@
 const Express = require('express');
 const cors = require('cors');
-const app = Express();
 const connectDB = require('./db');
 
 // Specify ports for webserver and MongoDB
@@ -10,13 +9,18 @@ const MONGO_PORT = 27017;
 // Connect to MongoDB on the specified port
 connectDB(MONGO_PORT);
 
+const app = Express();
+
 // CORS
-app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8888');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    next();
-});
+app.use(
+  cors({
+      allowedHeaders: ["Content-Type"], // you can change the headers
+      exposedHeaders: ["Content-Type"], // you can change the headers
+      origin: "*",
+      methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+      preflightContinue: true
+  })
+)
 
 // Body parser
 app.use(Express.urlencoded({ extended: true }));
@@ -26,6 +30,7 @@ app.use(Express.json());
 app.use('/', require('./routes/index'));
 app.use('/', require('./routes/createURL'));
 
+// Listen on the specified port
 app.listen(PORT, () => {
     console.log(`Server is running at PORT ${PORT}`);
 });
