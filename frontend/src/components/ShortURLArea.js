@@ -49,7 +49,7 @@ const ShortURLArea = ({status, linkData, setLinkData}) => {
     }
   }
 
-  if (status === null && linkData.shortURL) {
+  if (status === null && linkData.ext) {
     return (
       <div
         id="short-url-area"

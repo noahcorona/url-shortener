@@ -34,12 +34,19 @@ function App() {
    * @return {Promise<void>}
    */
   async function onFormSubmit(urlData) {
-    const {url, lifespan} = urlData;
+    let url = urlData.url;
+    const lifespan = urlData.lifespan;
 
     // URL validation
     if (isURL(url)) {
       // toggle waiting status
       setStatus('waiting');
+
+      // prepend http if not already in url
+      if (!/^https?:\/\//i.test(url)) {
+        url = 'http://' + url;
+      }
+
       // make a POST request to the create API
       axios.post(
           API_URL + '/create',
