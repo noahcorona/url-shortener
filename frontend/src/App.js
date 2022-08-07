@@ -14,6 +14,8 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
+const API_URL = "https://api.smlr.org";
+
 /**
  * Application entry point
  * @return {JSX.Element}
@@ -39,7 +41,7 @@ function App() {
       // toggle waiting status
       setStatus('waiting');
       // make a POST request to the create API
-      axios.post('/create', {
+      axios.post(API_URL + '/create', {
         destination: url,
       }).then((response) => {
         setLinkData({
