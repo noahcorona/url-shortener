@@ -1,93 +1,79 @@
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import ShortURLArea from './components/ShortURLArea';
 import URLInputArea from './components/URLInputArea';
 import Navigation from './components/Navigation';
 import DocModal from './components/DocModal';
+import WaitingArea from './components/WaitingArea';
 import axios from 'axios';
+import isURL from 'validator/lib/isURL';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 /**
- * Entry point of our application
+ * Application entry point
  * @return {JSX.Element}
  * @constructor
  */
 function App() {
   const [modalShowing, setModalShowing] = useState(false);
-  const [shortenedURL, setShortenedURL] = useState(null);
-  const [formValues, setFormValues] = useState(null);
+  const [linkData, setLinkData] = useState({});
+  const [status, setStatus] = useState(null);
 
-  // effect to fetch from API when form is submitted
-  useEffect(() => {
-    /*
-      formValues structure and values:
-      {
-        url: "https://yoururl.com/",
-        lifespan: "0" (forever) or
-                  "number length-descriptor" (e.g. 1 day)
-       }
-    */
+  /**
+   * the URL creation form submission handler
+   *   validates the URL and makes a POST request to the smlr API
+   *
+   * @param {object} urlData - the form data representing url creation params
+   * @return {Promise<void>}
+   */
+  async function onFormSubmit(urlData) {
+    const {url, lifespan} = urlData;
 
-    /**
-     * Fetch the shortened URL from the SMLR API using a GET request
-     * @param {string} url - the url to shorten
-     * @param {string} lifespan - the lifespan of the url
-     * @return {Promise<AxiosResponse<any>>} the API response with a JSON body
-     */
-    async function getShortURL(url) {
+    // URL validation
+    if (isURL(url)) {
+      // toggle waiting status
+      setStatus('waiting');
+      // make a POST request to the create API
       axios.post('/create', {
         destination: url,
       }).then((response) => {
-        const {shortened, destination, ext, date, clicks} = response.data;
-
-        // handle the data here - for example...
-        console.log('The URL', destination,
-            'was shortened to', shortened,
-            'at', date,
-            'and was given an extension of', ext,
-            '. The short url has been used', clicks, 'times.');
-      });
-
-      return shortenedURL;
-    }
-
-    if (formValues) {
-      getShortURL(formValues.url, formValues.lifespan)
-          .then((res) => {
-            console.log('API response: ', res);
-
-            // set state for shortened URL and scroll to its component
-            setShortenedURL(res.data.shortened);
-            const shortURLArea = document.getElementById('short-url-area');
-            window.scrollTo({
-              top: shortURLArea.offsetTop,
-              behavior: 'smooth',
-            });
-          })
+        setLinkData({
+          shortURL: response.data.shortened,
+          originalURL: url,
+          lifespan: lifespan,
+        });
+        setStatus(null);
+        console.log('API response: ', response);
+      })
           .catch((error) => {
-            console.log('error making API request', error);
             if (error.response) {
-            // The request was made and the server
-            // responded with a status code
-            // that falls out of the range of 2xx
-              console.log(error.response.data);
-              console.log(error.response.status);
-              console.log(error.response.headers);
+              setStatus('Sorry! Looks like there\'s been an error' +
+                  ' on our part.');
             } else if (error.request) {
-            // The request was made but no response was received
-            // `error.request` is an instance of XMLHttpRequest in the
-            // browser and an instance of
-            // http.ClientRequest in node.js
-              console.log(error.request);
+              setStatus('Sorry! Our server isn\'t responding.');
             } else {
-              // Something happened in setting up the
-              // request that triggered an Error
-              console.log('Error', error.message);
+              setStatus('Oops! It looks like the request was malformed. ');
             }
-            console.log(error.config);
+            console.log('API response (error): ', error);
           });
+    } else {
+      setStatus('Oops. That doesn\'t look like a URL!');
     }
-  }, [formValues]);
+  }
+
+  /**
+   * show the documentation window
+   * @param {event} e - button click event
+   */
+  function toggleDocModal(e) {
+    e.preventDefault();
+    setModalShowing(true);
+  }
 
   return (
     <div className="App">
@@ -97,22 +83,24 @@ function App() {
           handleClose={() => setModalShowing(false)}
         />
         <Navigation
-          onDocClick={(e) => {
-            e.preventDefault();
-            setModalShowing(true);
-          }}
+          onDocClick={toggleDocModal}
         />
-        <div className="Content-Body">
-          <div className="Content-Centered">
-            <URLInputArea setFormValues={setFormValues} />
-            {shortenedURL && (
-              <ShortURLArea
-                shortURL={shortenedURL}
-                originalURL={formValues.url}
-                lifespan={formValues.lifespan}
-              />
-            )}
-          </div>
+        <div className="Content-Centered">
+          <URLInputArea
+            status={status}
+            setStatus={setStatus}
+            onFormSubmit={onFormSubmit}
+          />
+          <WaitingArea
+            status={status}
+            setStatus={setStatus}
+          />
+          <ShortURLArea
+            status={status}
+            setStatus={setStatus}
+            linkData={linkData}
+            setLinkData={setLinkData}
+          />
         </div>
       </div>
     </div>

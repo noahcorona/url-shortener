@@ -3,7 +3,8 @@ import {Button, Form, InputGroup} from 'react-bootstrap';
 import QRCode from 'react-qr-code';
 import {FaClipboard} from 'react-icons/fa';
 
-const ShortURLArea = ({shortURL, originalURL, lifespan}) => {
+const ShortURLArea = ({status, linkData, setLinkData}) => {
+  const {shortURL, originalURL, lifespan} = linkData;
   const [copied, setCopied] = useState(false);
 
   const handleFocus = (event) => event.target.select();
@@ -46,71 +47,84 @@ const ShortURLArea = ({shortURL, originalURL, lifespan}) => {
     }
   }
 
-  return (
-    <div
-      id="short-url-area"
-      className="Content-Card"
-    >
-      <b>
-        <a
-          className="Link"
-          href="#"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {originalURL}
-        </a>
-        {' > '}
-        <a
-          className="Link"
-          href="#"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {shortURL}
-        </a>
-      </b>
-      <p>
-        {getLifespanText() === 'forever' ?
+  if (status === null && linkData.shortURL) {
+    return (
+      <div
+        id="short-url-area"
+        className="Content-Card"
+      >
+        <h3>
+          <a
+            className="Link"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {originalURL}
+          </a>
+          {' > '}
+          <a
+            className="Link"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {shortURL}
+          </a>
+        </h3>
+        <p>
+          {getLifespanText() === 'forever' ?
             'This link has no expiration date' :
             'This link expires in ' + getLifespanText()}
-      </p>
-      <div className='bottom-spaced'>
-        <InputGroup>
-          <Form.Control
-            onFocus={handleFocus}
-            type="text"
-            value={shortURL}
-            readOnly
-            selectTextOnFocus
-          />
-          <Button
-            variant="success"
-            className="paste-button"
-            onClick={handleCopyClick}
-          >
-            {copied ? 'Copied to Clipboard' : (
+        </p>
+        <div className='bottom-spaced'>
+          <InputGroup>
+            <Form.Control
+              onFocus={handleFocus}
+              type="text"
+              value={shortURL}
+              readOnly
+            />
+            <Button
+              variant="success"
+              className="paste-button"
+              onClick={handleCopyClick}
+            >
+              {copied ? 'Copied to Clipboard' : (
                   <>Copy<FaClipboard className="button-icon" /></>
               )}
-          </Button>
-        </InputGroup>
-      </div>
-      <div className="QR-Area d-grid gap-2">
-        <QRCode
-          className="centered"
-          value={shortURL}
-          alt={shortURL}
-        />
-        <Button
-          variant="success"
-          className="d-block"
-        >
+            </Button>
+          </InputGroup>
+        </div>
+        <div className="QR-Area d-grid gap-2">
+          {
+            shortURL && (
+              <QRCode
+                className="centered"
+                value={shortURL}
+                alt={shortURL}
+              />
+            )
+          }
+          <Button
+            variant="success"
+            className="d-block"
+          >
             Copy image
-          <FaClipboard className="button-icon" />
+            <FaClipboard className="button-icon" />
+          </Button>
+        </div>
+        <Button
+          variant="secondary"
+          onClick={() => setLinkData({})}
+        >
+          Make another short URL
         </Button>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return <div />;
+  }
 };
 
 export default ShortURLArea;

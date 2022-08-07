@@ -1,29 +1,27 @@
 import {Button, Form, InputGroup} from 'react-bootstrap';
 import {useState} from 'react';
 import {FaClipboard} from 'react-icons/fa';
-import isURL from 'validator/lib/isURL';
 
 const URLInputArea = (props) => {
-  const [inputURL, setInputURL] = useState('');
-  const [inputLifespan, setInputLifespan] = useState('0');
-  const [error, setError] = useState(null);
+  const [url, setUrl] = useState('');
+  const [lifespan, setLifespan] = useState('0');
 
   const submitHandler = (e) => {
+    // prevent default form submission behavior, clear input
     e.preventDefault();
 
-    if (isURL(inputURL)) {
-      props.setFormValues({url: inputURL, lifespan: inputLifespan});
-    } else {
-      setInputURL('');
-      setError('The URL entered was not valid');
-    }
+    // reset input and call the url form handler
+    setUrl('');
+    props.onFormSubmit({url, lifespan});
   };
 
-  const clickHandler = async (e) => {
+  const pasteButtonHandler = async (e) => {
+    // prevent default button behavior
     e.preventDefault();
+
+    // copy clipboard text and set input text
     const text = await navigator.clipboard.readText();
-    console.log('Pasted', text);
-    setInputURL(text);
+    setUrl(text);
   };
 
   return (
@@ -32,7 +30,7 @@ const URLInputArea = (props) => {
       id="url-input-area"
       className="Content-Card"
     >
-      <b>Enter a URL</b>
+      <h3>Enter a URL</h3>
       <p>A smlr.org link and QR code will be created</p>
       <Form
         className="url-form"
@@ -45,24 +43,24 @@ const URLInputArea = (props) => {
               type="text"
               placeholder="https://yoururl.com/"
               onChange={(e) => {
-                setInputURL(e.target.value);
+                setUrl(e.target.value);
               }}
-              value={inputURL}
+              value={url}
             />
             <Button
               variant="secondary"
-              onClick={clickHandler}
+              onClick={pasteButtonHandler}
             >
               Paste <FaClipboard className="button-icon" />
             </Button>
           </InputGroup>
         </div>
-        <div className="bottom-spaced">
+        <div>
           <InputGroup>
             <Form.Select
               aria-label="Default select example"
               id="lifespan"
-              onChange={(e) => setInputLifespan(e.target.value)}
+              onChange={(e) => setLifespan(e.target.value)}
             >
               <option value="0">Forever</option>
               <option value="1 year">A year</option>
@@ -80,9 +78,6 @@ const URLInputArea = (props) => {
             </Button>
           </InputGroup>
         </div>
-        {
-          error && <p className="error-text">{error}</p>
-        }
       </Form>
     </div>
   );
