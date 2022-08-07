@@ -21,11 +21,7 @@ import '@fontsource/roboto/700.css';
  */
 function App() {
   const [modalShowing, setModalShowing] = useState(false);
-  const [linkData, setLinkData] = useState({
-    shortURL: 'smlr.org/GFDSgdf-1',
-    originalURL: 'https://google.com/',
-    lifespan: '1 year',
-  });
+  const [linkData, setLinkData] = useState(null);
   const [status, setStatus] = useState(null);
 
   /**
