@@ -7,7 +7,7 @@ router.get('/:ext', async (req, res) => {
     const url = await urlDB.findOne({ ext: req.params.ext });
     if (url) {
       // increment click counter and save database
-      url.clicks++;
+      url.redirects++;
       url.save();
 
       // redirect the user

@@ -2,43 +2,70 @@ const Express = require('express');
 const router = Express.Router();
 const shortid = require('shortid');
 const urlDB = require('../models/URL');
+const {hasProfaneWords} = require("aedos");
 
-function validateUrl(value) {
-  return /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(
-    value
-  );
+// Validate URL string and check for profanity
+async function validateURL(url) {
+  try {
+    new URL(url);
+    return true;
+  } catch (err) {
+    return false;
+  }
 }
 
 // Short URL Generator
 router.post('/create', async (req, res) => {
-  const baseURL = 'http://localhost:3000';
+  const baseURL = 'http://localhost';
   const destinationURL = req.body.destination;
+  const reqExt = req.body.reqExt;
 
-  const randomID = shortid.generate();
-  if (validateUrl(destinationURL)) {
-    try {
-      let url = await urlDB.findOne({destination: destinationURL});
-      if (url) {
-        res.json(url);
+  // validate URL and check requested extension for profanity
+  if(!(await validateURL(destinationURL))) {
+    res.status(400).json('An invalid destination URL was provided');
+  }
+
+  let ext = '';
+
+  if(reqExt) {
+    // check the requested extension for profanity
+    if(hasProfaneWords(reqExt)) {
+      // the URL was valid but requested extension contained profanity
+      res.status(400).json('A profane URL extension was provided');
+    } else {
+      if(await urlDB.findOne({ext: reqExt})) {
+        // the requested URL extension is taken
+        res.status(400).json('The URL extension provided is currently being used');
       } else {
-        const shortUrl = baseURL + '/' + randomID;
-
-        url = new urlDB({
-          ext: randomID,
-          destination: destinationURL,
-          date: new Date(),
-          shortened: shortUrl,
-        });
-
-        await url.save();
-        res.json(url);
+        // the request URL is not taken and contains no profanity
+        ext = reqExt;
       }
-    } catch (err) {
-      console.log(err);
-      res.status(500).json('Server error');
     }
   } else {
-    res.status(400).json('Invalid URL was provided as input');
+    // generate an extension with no profanity that is not taken in MongoDB
+    ext = shortid.generate();
+    while(hasProfaneWords(ext) || await urlDB.findOne({ext: ext})) {
+      ext = shortid.generate()
+    }
+  }
+
+  try {
+    // create a new entry in URLs database
+    const url = new urlDB({
+      ext: ext,
+      destination: destinationURL,
+      date: new Date(),
+      shortened: baseURL + '/' + ext,
+    });
+    await url.save();
+
+    // send as a response a JSON object of the new MongoDB entry info
+    res.json(url);
+  } catch (err) {
+    console.log('Error writing to MongoDB database:', err);
+
+    // send a 500 server error as response
+    res.status(500).json('Our servers are having trouble. We apologize for the inconvenience!');
   }
 });
 

@@ -30,7 +30,7 @@ const DocModal = ({show, handleClose}) => {
               '      destination: url,\n' +
               '  }).then((response) => {\n' +
               '      const {shortened, destination, ext, ' +
-              'date, clicks} = response.data;\n\n' +
+              'date, redirects} = response.data;\n\n' +
               '      // handle the data here - for example...\n' +
               '      console.log(\'The URL\', destination, \n' +
               '                  \'was shortened to\', shortened,\n' +
@@ -38,7 +38,7 @@ const DocModal = ({show, handleClose}) => {
               '                  \'and was given an ' +
               'extension of\', ext' + ',\n' +
               '                  \'. The short url has been used' +
-              '\', clicks, \'times.\');\n' +
+              '\', redirects, \'times.\');\n' +
               '  })\n' +
               '}'}
           </code>

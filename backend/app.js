@@ -14,8 +14,8 @@ const app = Express();
 // CORS
 app.use(
   cors({
-      allowedHeaders: ["Content-Type"], // you can change the headers
-      exposedHeaders: ["Content-Type"], // you can change the headers
+      allowedHeaders: ["Content-Type"],
+      exposedHeaders: ["Content-Type"],
       origin: "*",
       methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
       preflightContinue: true
