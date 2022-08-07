@@ -86,8 +86,8 @@ const ShortURLArea = ({status, linkData, setLinkData}) => {
               readOnly
             />
             <Button
-              variant="success"
-              className="paste-button"
+              variant="secondary"
+              className="light-button"
               onClick={handleCopyClick}
             >
               {copied ? 'Copied to Clipboard' : (
@@ -107,19 +107,22 @@ const ShortURLArea = ({status, linkData, setLinkData}) => {
             )
           }
           <Button
-            variant="success"
-            className="d-block"
+            variant="secondary"
+            className="d-block light-button bottom-spaced"
           >
             Copy image
             <FaClipboard className="button-icon" />
           </Button>
         </div>
-        <Button
-          variant="secondary"
-          onClick={() => setLinkData({})}
-        >
-          Make another short URL
-        </Button>
+        <div className="d-grid gap-2">
+          <Button
+            variant="secondary"
+            className="d-block"
+            onClick={() => setLinkData(null)}
+          >
+            Make another short URL
+          </Button>
+        </div>
       </div>
     );
   } else {

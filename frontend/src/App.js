@@ -21,7 +21,11 @@ import '@fontsource/roboto/700.css';
  */
 function App() {
   const [modalShowing, setModalShowing] = useState(false);
-  const [linkData, setLinkData] = useState({});
+  const [linkData, setLinkData] = useState({
+    shortURL: 'smlr.org/GFDSgdf-1',
+    originalURL: 'https://google.com/',
+    lifespan: '1 year',
+  });
   const [status, setStatus] = useState(null);
 
   /**
@@ -89,6 +93,7 @@ function App() {
           <URLInputArea
             status={status}
             setStatus={setStatus}
+            linkData={linkData}
             onFormSubmit={onFormSubmit}
           />
           <WaitingArea
@@ -98,7 +103,7 @@ function App() {
           <ShortURLArea
             status={status}
             setStatus={setStatus}
-            linkData={linkData}
+            linkData={linkData ? linkData : {}}
             setLinkData={setLinkData}
           />
         </div>
