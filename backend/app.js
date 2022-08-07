@@ -10,8 +10,13 @@ const MONGO_PORT = 27017;
 // Connect to MongoDB on the specified port
 connectDB(MONGO_PORT);
 
-// CORS middleware
-app.options('*', cors());
+// CORS
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8888');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    next();
+});
 
 // Body parser
 app.use(Express.urlencoded({ extended: true }));
