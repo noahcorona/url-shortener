@@ -5,7 +5,7 @@ const urlDB = require('../models/URL');
 const {hasProfaneWords} = require("aedos");
 
 // Validate URL string and check for profanity
-async function validateURL(url) {
+function validateURL(url) {
   try {
     new URL(url);
     return true;
@@ -21,7 +21,7 @@ router.post('/create', async (req, res) => {
   const reqExt = req.body.reqExt;
 
   // validate URL and check requested extension for profanity
-  if(!(await validateURL(destinationURL))) {
+  if(!validateURL(destinationURL)) {
     res.status(400).json('An invalid destination URL was provided');
   }
 
@@ -29,7 +29,7 @@ router.post('/create', async (req, res) => {
 
   if(reqExt) {
     // check the requested extension for profanity
-    if(hasProfaneWords(reqExt)) {
+    if(await hasProfaneWords(reqExt)) {
       // the URL was valid but requested extension contained profanity
       res.status(400).json('A profane URL extension was provided');
     } else {
@@ -44,7 +44,7 @@ router.post('/create', async (req, res) => {
   } else {
     // generate an extension with no profanity that is not taken in MongoDB
     ext = shortid.generate();
-    while(hasProfaneWords(ext) || await urlDB.findOne({ext: ext})) {
+    while(await hasProfaneWords(ext) || await urlDB.findOne({ext: ext})) {
       ext = shortid.generate()
     }
   }
