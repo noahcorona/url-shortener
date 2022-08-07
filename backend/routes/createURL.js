@@ -16,7 +16,7 @@ function validateURL(url) {
 
 // Short URL Generator
 router.post('/create', async (req, res) => {
-  const baseURL = 'http://localhost';
+  const baseURL = 'https://smlr.org/';
   const destinationURL = req.body.destination;
   const reqExt = req.body.reqExt;
 
@@ -27,9 +27,18 @@ router.post('/create', async (req, res) => {
 
   let ext = '';
 
-  if(reqExt) {
-    // check the requested extension for profanity
-    if(await hasProfaneWords(reqExt)) {
+  if(reqExt === null) {
+    // generate an extension with no profanity that is not taken in MongoDB
+    ext = shortid.generate();
+    while(await hasProfaneWords(ext) || await urlDB.findOne({ext: ext})) {
+      ext = shortid.generate()
+    }
+  } else {
+    // check the requested extension for profanity or route names
+    if(reqExt === 'create' || reqExt === 'go') {
+      // the URL was valid but has the same name as a route
+      res.status(400).json('The URL extension provided is not allowed');
+    } else if(await hasProfaneWords(reqExt)) {
       // the URL was valid but requested extension contained profanity
       res.status(400).json('A profane URL extension was provided');
     } else {
@@ -41,17 +50,11 @@ router.post('/create', async (req, res) => {
         ext = reqExt;
       }
     }
-  } else {
-    // generate an extension with no profanity that is not taken in MongoDB
-    ext = shortid.generate();
-    while(await hasProfaneWords(ext) || await urlDB.findOne({ext: ext})) {
-      ext = shortid.generate()
-    }
   }
 
   try {
     // create a new entry in URLs database
-    const url = new urlDB({
+    let url = new urlDB({
       ext: ext,
       destination: destinationURL,
       date: new Date(),
