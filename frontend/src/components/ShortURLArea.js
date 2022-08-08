@@ -119,7 +119,7 @@ const ShortURLArea = ({status, linkData, setLinkData}) => {
         <div className="d-grid gap-2">
           <Button
             variant="secondary"
-            className="d-block"
+            className="d-block go-button"
             onClick={() => setLinkData(null)}
           >
             Make another short URL

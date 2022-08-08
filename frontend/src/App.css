@@ -166,6 +166,11 @@
   padding: 1em;
 }
 
+.Content-Card h3 {
+  padding-top: 0.25em;
+  padding-bottom: 0.5em;
+}
+
 /*
     Button and link styles
  */
@@ -175,9 +180,28 @@
 }
 
 .light-button {
-  background-color: #aaa;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  color: #555;
+}
+
+.light-button:hover {
+  background-color: #ddd;
+  border: 1px solid #bbb;
+  color: #555;
+}
+
+.go-button {
+  font-weight: bold;
+  background-color: #8abe75;
   border: none;
   color: #fff;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.go-button:hover {
+  background-color: #71a45d;
 }
 
 .button-icon {
@@ -213,4 +237,46 @@
 
 .error-text {
   color: #d36666;
+}
+
+.input-label {
+  font-size: 0.75em;
+  align-self: center;
+  padding-right: 0.5em;
+}
+
+.input-group-text {
+  background-color: #aaa;
+  color: #fff;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.custom-extension-prefix {
+  background-color: #eee;
+  border: 1px solid #ccc;
+  color: #555;
+}
+
+/*
+    Footer styles
+ */
+
+.Footer {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+
+.Footer-Content {
+  width: 75%;
+  max-width: 800px;
+  margin: auto;
+}
+
+.Footer p {
+  font-size: 0.5em;
+  padding: 0 1em 1em;
 }

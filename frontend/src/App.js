@@ -13,6 +13,7 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
+import Footer from './components/Footer';
 
 const API_URL = 'https://api.smlr.org';
 
@@ -35,6 +36,7 @@ function App() {
    */
   async function onFormSubmit(urlData) {
     let url = urlData.url;
+    const reqExt = urlData.reqExt;
     const lifespan = urlData.lifespan;
 
     // URL validation
@@ -47,12 +49,17 @@ function App() {
         url = 'http://' + url;
       }
 
+      const requestData = reqExt ? {
+        destination: url,
+        reqExt: reqExt,
+      } : {
+        destination: url,
+      };
+
       // make a POST request to the create API
       axios.post(
           API_URL + '/create',
-          {
-            destination: url,
-          },
+          requestData,
       ).then((response) => {
         setLinkData({
           ext: response.data.ext,
@@ -114,6 +121,7 @@ function App() {
             linkData={linkData ? linkData : {}}
             setLinkData={setLinkData}
           />
+          <Footer />
         </div>
       </div>
     </div>
