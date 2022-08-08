@@ -135,8 +135,14 @@
 
 .navbar-collapse {
   text-align: right;
-  padding: 1em;
+  padding: 2em;
+  margin-left: -1em;
+  margin-top: 1em;
+  border-bottom-right-radius: 0.5em;
+  border-bottom-left-radius: 0.5em;
   color: #555;
+  background-color: #fff;
+  z-index: 9999;
 }
 
 .Brand-Items b {

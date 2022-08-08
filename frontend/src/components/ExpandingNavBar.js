@@ -39,7 +39,7 @@ const ExpandingNavBar = ({onDocClick}) => {
             <FaGithub className="Expanding-Nav-Link-Icon" />
           </Nav.Link>
           <Nav.Link href="https://buymeacoffee.com/4IeSH91kr">
-            Support the developer
+            Support the Creator
             <SiBuymeacoffee className="Expanding-Nav-Link-Icon" />
           </Nav.Link>
         </Nav>
