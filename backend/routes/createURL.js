@@ -1,8 +1,8 @@
 const Express = require('express');
 const router = Express.Router();
 const shortid = require('shortid');
+const Filter = require("bad-words");
 const urlDB = require('../models/URL');
-const {validateText} = require("aedos");
 
 // Validate URL string and check for profanity
 function validateURL(url) {
@@ -16,8 +16,8 @@ function validateURL(url) {
 
 // Check text for profanity
 async function isProfane(text) {
-  const detect = await validateText(text).detectProfaneWordsInText()
-  return detect["is-profane"]
+  let filter = new Filter();
+  return filter.isProfane(text);
 }
 
 // Short URL Generator
