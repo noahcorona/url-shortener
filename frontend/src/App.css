@@ -20,10 +20,9 @@
 
 .Navigation {
   width: 100%;
-  position: absolute;
+  position: fixed;
+  left: 0;
   top: 0;
-  background-color: #de354c;
-  border-bottom: 1px #ccc solid;
   font-size: 1em;
 }
 
@@ -40,7 +39,7 @@
 }
 
 .Navigation-Link {
-  color: #fff;
+  color: #555;
   text-decoration: none;
   font-weight: bold;
   margin-right: 1.5em;
@@ -48,18 +47,19 @@
 }
 
 .Navigation p {
-  color: #ddd;
+  display: inline;
+  color: #555;
   font-size: 0.75em;
+  font-weight: bold;
 }
 
 .Navigation-Button-Area {
-  align-content: center;
-  justify-content: center;
   padding-top: 0.25em;
+  padding-bottom: 0.25em;
 }
 
 .Navigation-Link:visited {
-  color: #fff;
+  color: #555;
 }
 
 .Navigation-Link:hover {
@@ -69,7 +69,7 @@
 .Navigation-Button {
   background-color: transparent;
   text-decoration: none;
-  color: #fff;
+  color: #555;
   border: none;
   vertical-align: center;
   align-content: center;
@@ -77,13 +77,13 @@
 }
 
 .Navigation-Button:hover {
-  color: #ccc;
+  color: #555;
 }
 
 .Navigation-Button-Icon {
   background-color: transparent;
   text-decoration: none;
-  color: #fff;
+  color: #555;
   border: none;
   align-self: center;
   justify-content: center;
@@ -143,6 +143,7 @@
   background-color: #f3f3f3;
   font-size: 1.5em;
   color: #555;
+  min-height: 100vh;
 }
 
 .Content-Centered {
@@ -150,25 +151,32 @@
   width: 75%;
   min-width: 350px;
   max-width: 800px;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  min-height: 100vh;
+}
+
+.Content-Header {
+  padding: 0.5em 2em;
+  background-color: #de354c;
+  border-top-right-radius: 0.5em;
+  border-top-left-radius: 0.5em;
+  color: #fff;
+}
+
+.Content-Header h3 {
+  padding-top: 0.5em;
 }
 
 .Content-Card {
   background-color: rgba(131, 99, 66, 0.1);
-  margin-top: 2em;
-  margin-bottom: 2em;
-  border-radius: 0.5em;
   width: 100%;
-  padding: 1em;
-}
-
-.Content-Card h3 {
-  padding-top: 0.25em;
-  padding-bottom: 0.5em;
+  padding: 2em;
+  padding-top: 1em;
+  border-bottom-left-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
 }
 
 /*
@@ -193,15 +201,15 @@
 
 .go-button {
   font-weight: bold;
-  background-color: #8abe75;
+  background-color: #fff;
   border: none;
-  color: #fff;
+  color: #8abe75;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
 }
 
 .go-button:hover {
-  background-color: #71a45d;
+  background-color: #8abe75;
 }
 
 .button-icon {
@@ -211,7 +219,7 @@
 }
 
 .shorten-button {
-  margin: auto auto auto 1em;
+  margin: auto;
   padding: 0;
   color: #fff;
   background-color: #888;
@@ -267,6 +275,7 @@
 .Footer {
   width: 100%;
   position: fixed;
+  left: 0;
   bottom: 0;
 }
 

@@ -10,9 +10,9 @@ const NavBar = ({onDocClick}) => {
             href="#"
             className="Navigation-Link"
           >
-            smlr
+            <img src="/android-chrome-192x192.png" width={64} height={64} />
           </a>
-          <p>Sometimes, smaller <i>is</i> better</p>
+          <p>Sometimes, smaller is better</p>
         </div>
         <div className="Navigation-Button-Area">
           <a

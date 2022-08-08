@@ -51,81 +51,85 @@ const ShortURLArea = ({status, linkData, setLinkData}) => {
 
   if (status === null && linkData.ext) {
     return (
-      <div
-        id="short-url-area"
-        className="Content-Card"
-      >
-        <h3>
-          <a
-            className="Link"
-            href={originalURL}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {originalURL}
-          </a>
-          {' > '}
-          <a
-            className="Link"
-            href={shortURL}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {shortURL}
-          </a>
-        </h3>
-        <p>
-          {getLifespanText() === 'forever' ?
-            'This link has no expiration date' :
-            'This link expires in ' + getLifespanText()}
-        </p>
-        <div className='bottom-spaced'>
-          <InputGroup>
-            <Form.Control
-              onFocus={handleFocus}
-              type="text"
-              value={shortURL}
-              readOnly
-            />
+      <>
+        <div
+          id="short-url-area"
+          className="Content-Card"
+        >
+          <div className="d-flex justify-content-between gap-5">
+            <div className='bottom-spaced'>
+              <h3>
+                <a
+                  className="Link"
+                  href={originalURL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {originalURL}
+                </a>
+                {' > '}
+                <a
+                  className="Link"
+                  href={shortURL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {shortURL}
+                </a>
+              </h3>
+              <p>
+                {getLifespanText() === 'forever' ?
+                  'This link has no expiration date' :
+                  'This link expires in ' + getLifespanText()}
+              </p>
+              <InputGroup>
+                <Form.Control
+                  onFocus={handleFocus}
+                  type="text"
+                  value={shortURL}
+                  readOnly
+                />
+                <Button
+                  variant="secondary"
+                  className="light-button"
+                  onClick={handleCopyClick}
+                >
+                  {copied ? 'Copied to Clipboard' : (
+                    <>Copy<FaClipboard className="button-icon" /></>
+                  )}
+                </Button>
+              </InputGroup>
+            </div>
+            <div className="QR-Area d-grid gap-2">
+              {
+                shortURL && (
+                  <QRCode
+                    className="centered"
+                    value={shortURL}
+                    alt={shortURL}
+                  />
+                )
+              }
+              <Button
+                variant="secondary"
+                className="d-block light-button bottom-spaced"
+              >
+                Copy image
+                <FaClipboard className="button-icon" />
+              </Button>
+            </div>
+          </div>
+          <div className="d-grid gap-2">
             <Button
               variant="secondary"
-              className="light-button"
-              onClick={handleCopyClick}
+              className="d-block go-button"
+              onClick={() => setLinkData(null)}
             >
-              {copied ? 'Copied to Clipboard' : (
-                  <>Copy<FaClipboard className="button-icon" /></>
-              )}
+              Make another short URL
             </Button>
-          </InputGroup>
+          </div>
         </div>
-        <div className="QR-Area d-grid gap-2">
-          {
-            shortURL && (
-              <QRCode
-                className="centered"
-                value={shortURL}
-                alt={shortURL}
-              />
-            )
-          }
-          <Button
-            variant="secondary"
-            className="d-block light-button bottom-spaced"
-          >
-            Copy image
-            <FaClipboard className="button-icon" />
-          </Button>
-        </div>
-        <div className="d-grid gap-2">
-          <Button
-            variant="secondary"
-            className="d-block go-button"
-            onClick={() => setLinkData(null)}
-          >
-            Make another short URL
-          </Button>
-        </div>
-      </div>
+      </>
     );
   } else {
     return <div />;
