@@ -14,6 +14,12 @@ function validateURL(url) {
   }
 }
 
+// Check text for profanity
+async function isProfane(text) {
+  const detect = await validateText(text).detectProfaneWordsInText()
+  return detect["is-profane"]
+}
+
 // Short URL Generator
 router.post('/create', async (req, res) => {
   const baseURL = 'https://smlr.org/';
@@ -30,7 +36,7 @@ router.post('/create', async (req, res) => {
   if(reqExt === null) {
     // generate an extension with no profanity that is not taken in MongoDB
     ext = shortid.generate();
-    while(await validateText(ext).detectProfaneWordsInText() || await urlDB.findOne({ext: ext})) {
+    while(await isProfane(ext) || await urlDB.findOne({ext: ext})) {
       ext = shortid.generate()
     }
   } else {
@@ -38,7 +44,7 @@ router.post('/create', async (req, res) => {
     if(reqExt === 'create' || reqExt === 'go') {
       // the URL was valid but has the same name as a route
       res.status(400).json('The URL extension provided is not allowed');
-    } else if(await validateText(reqExt).detectProfaneWordsInText()) {
+    } else if(await isProfane(reqExt)) {
       // the URL was valid but requested extension contained profanity
       res.status(400).json('A profane URL extension was provided');
     } else {
