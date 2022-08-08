@@ -24,6 +24,9 @@
   left: 0;
   top: 0;
   font-size: 1em;
+  background-color: #f3f3f3;
+  z-index: 9999;
+  padding-bottom: 1em;
 }
 
 .Navigation-Content {
@@ -277,6 +280,9 @@
   position: fixed;
   left: 0;
   bottom: 0;
+  background-color: #f3f3f3;
+  z-index: 9999;
+  padding-top: 1em;
 }
 
 .Footer-Content {
