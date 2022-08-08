@@ -33,6 +33,9 @@ const URLInputArea = (props) => {
         className="Content-Card"
       >
         <h3>A free small URL and QR service</h3>
+        {props.status && props.status !== 'waiting' && props.linkData &&
+            <h3 className="error-text">{props.status}</h3>
+        }
         <Form
           className="url-form"
           onSubmit={submitHandler}

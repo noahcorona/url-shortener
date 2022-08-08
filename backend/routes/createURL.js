@@ -2,7 +2,7 @@ const Express = require('express');
 const router = Express.Router();
 const shortid = require('shortid');
 const urlDB = require('../models/URL');
-const {hasProfaneWords} = require("aedos");
+const {validateText} = require("aedos");
 
 // Validate URL string and check for profanity
 function validateURL(url) {
@@ -30,7 +30,7 @@ router.post('/create', async (req, res) => {
   if(reqExt === null) {
     // generate an extension with no profanity that is not taken in MongoDB
     ext = shortid.generate();
-    while(await hasProfaneWords(ext) || await urlDB.findOne({ext: ext})) {
+    while(await validateText(ext).detectProfaneWordsInText() || await urlDB.findOne({ext: ext})) {
       ext = shortid.generate()
     }
   } else {
@@ -38,7 +38,7 @@ router.post('/create', async (req, res) => {
     if(reqExt === 'create' || reqExt === 'go') {
       // the URL was valid but has the same name as a route
       res.status(400).json('The URL extension provided is not allowed');
-    } else if(await hasProfaneWords(reqExt)) {
+    } else if(await validateText(reqExt).detectProfaneWordsInText()) {
       // the URL was valid but requested extension contained profanity
       res.status(400).json('A profane URL extension was provided');
     } else {
