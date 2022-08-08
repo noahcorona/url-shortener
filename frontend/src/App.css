@@ -25,7 +25,7 @@
   top: 0;
   font-size: 1em;
   background-color: #f3f3f3;
-  z-index: 9999;
+  padding-top: 1em;
   padding-bottom: 1em;
 }
 
@@ -52,13 +52,14 @@
 .Navigation p {
   display: inline;
   color: #555;
-  font-size: 0.75em;
-  font-weight: bold;
+  font-size: 1em;
+  font-weight: 500;
 }
 
 .Navigation-Button-Area {
   padding-top: 0.25em;
   padding-bottom: 0.25em;
+  font-size: 1.5em;
 }
 
 .Navigation-Link:visited {
@@ -111,7 +112,6 @@
 
 .navbar {
   color: #555;
-  z-index: 9999;
   position: fixed;
   width: 100%;
   left: 0;
