@@ -1,7 +1,6 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import ShortURLArea from './components/ShortURLArea';
 import URLInputArea from './components/URLInputArea';
-import Navigation from './components/Navigation';
 import DocModal from './components/DocModal';
 import WaitingArea from './components/WaitingArea';
 import axios from 'axios';
@@ -14,6 +13,8 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import Footer from './components/Footer';
+import NavBar from './components/NavBar';
+import ExpandingNavBar from './components/ExpandingNavBar';
 
 const API_URL = 'https://api.smlr.org';
 
@@ -26,6 +27,25 @@ function App() {
   const [modalShowing, setModalShowing] = useState(false);
   const [linkData, setLinkData] = useState(null);
   const [status, setStatus] = useState(null);
+
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+
+  useEffect(() => {
+    /**
+     * Resize update handler to track window width
+     * Used to modify the navigation bar for mobile
+     * devices and narrow windows
+     */
+    function handleWindowResize() {
+      setWindowSize(window.innerWidth);
+    }
+
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, []);
 
   /**
    * the URL creation form submission handler
@@ -96,13 +116,19 @@ function App() {
 
   return (
     <div className="App">
+      {
+        windowSize > 600 && <NavBar onDocClick={toggleDocModal}/>
+      }
       <div className="Content">
+        <div>
+          {
+            windowSize < 600 &&
+              <ExpandingNavBar onDocClick={toggleDocModal}/>
+          }
+        </div>
         <DocModal
           show={modalShowing}
           handleClose={() => setModalShowing(false)}
-        />
-        <Navigation
-          onDocClick={toggleDocModal}
         />
         <div className="Content-Centered">
           <URLInputArea

@@ -7,10 +7,15 @@ const NavBar = ({onDocClick}) => {
       <div className="Navigation-Content">
         <div>
           <a
-            href="#"
+            href="/"
             className="Navigation-Link"
           >
-            <img src="/android-chrome-192x192.png" width={64} height={64} />
+            <img
+              src="/android-chrome-192x192.png"
+              alt="logo"
+              width={64}
+              height={64}
+            />
           </a>
           <p>Sometimes, smaller is better</p>
         </div>

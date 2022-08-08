@@ -2,18 +2,29 @@ import {Nav, Navbar} from 'react-bootstrap';
 import {FaBook, FaGithub} from 'react-icons/fa';
 import {SiBuymeacoffee} from 'react-icons/si';
 
-const ExpandingNavBar = ({isOnBottom, onDocClick}) => {
+const ExpandingNavBar = ({onDocClick}) => {
   return (
     <Navbar
       collapseOnSelect
-      bg="dark"
+      bg="transparent"
       expand="lg"
-      variant="dark"
+      variant="light"
     >
       <Navbar.Brand href="#">
         <span className="Brand-Items">
-          <b>smlr</b>
-          <p>sometimes, smaller <i>is</i> better</p>
+          <a
+            href="/"
+            className="Navigation-Link"
+          >
+            <img
+              src="/android-chrome-192x192.png"
+              alt="logo"
+              width={32}
+              height={32}
+              className="d-inline-block align-top"
+            />
+            Sometimes, smaller is better
+          </a>
         </span>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />

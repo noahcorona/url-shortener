@@ -64,37 +64,36 @@ const URLInputArea = (props) => {
                 </Button>
               </InputGroup>
             </div>
-            <div className="d-flex justify-content-between gap-2 bottom-spaced">
-              <InputGroup>
-                <InputGroup.Text className="custom-extension-prefix">
+            <InputGroup className="bottom-spaced">
+              <InputGroup.Text className="custom-extension-prefix">
                   https://smlr.org/
-                </InputGroup.Text>
-                <Form.Control
-                  id="reqExt"
-                  type="text"
-                  placeholder="optional-custom-extension"
-                  onChange={(e) => {
-                    setReqExt(e.target.value);
-                  }}
-                  className="italic"
-                  value={reqExt}
-                />
-              </InputGroup>
-              <Form.Select
-                aria-label="Default select example"
-                id="lifespan"
-                onChange={(e) => setLifespan(e.target.value)}
-              >
-                <option value="0">Lasts forever</option>
-                <option value="1 year">Expires in a year</option>
-                <option value="6 months">Expires in 6 months</option>
-                <option value="3 months">Expires in 3 months</option>
-                <option value="1 month">Expires in a month</option>
-                <option value="1 week">Expires in a week</option>
-                <option value="1 day">Expires in a day</option>
-              </Form.Select>
-            </div>
-            <div className="d-grid gap-2">
+              </InputGroup.Text>
+              <Form.Control
+                id="reqExt"
+                type="text"
+                placeholder="optional-custom-extension"
+                onChange={(e) => {
+                  setReqExt(e.target.value);
+                }}
+                className="italic"
+                value={reqExt}
+              />
+            </InputGroup>
+            <Form.Select
+              aria-label="Default select example"
+              id="lifespan"
+              onChange={(e) => setLifespan(e.target.value)}
+              className="bottom-spaced"
+            >
+              <option value="0">Lasts forever</option>
+              <option value="1 year">Expires in a year</option>
+              <option value="6 months">Expires in 6 months</option>
+              <option value="3 months">Expires in 3 months</option>
+              <option value="1 month">Expires in a month</option>
+              <option value="1 week">Expires in a week</option>
+              <option value="1 day">Expires in a day</option>
+            </Form.Select>
+            <div className="d-grid">
               <Button
                 type="submit"
                 variant="secondary"
