@@ -27,7 +27,6 @@ function App() {
   const [modalShowing, setModalShowing] = useState(false);
   const [linkData, setLinkData] = useState(null);
   const [status, setStatus] = useState(null);
-
   const [windowSize, setWindowSize] = useState(window.innerWidth);
 
   useEffect(() => {

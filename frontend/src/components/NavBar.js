@@ -17,7 +17,7 @@ const NavBar = ({onDocClick}) => {
               height={64}
             />
           </a>
-          <p>Sometimes, smaller is better</p>
+          <p>smlr</p>
         </div>
         <div className="Navigation-Button-Area">
           <a

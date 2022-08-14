@@ -23,7 +23,7 @@ const ExpandingNavBar = ({onDocClick}) => {
               height={32}
               className="d-inline-block align-top"
             />
-            Sometimes, smaller is better
+            smlr
           </a>
         </span>
       </Navbar.Brand>
