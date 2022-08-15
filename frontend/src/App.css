@@ -1,10 +1,14 @@
 * {
-  font-family: Roboto;
+  font-family: Roboto, sans-serif;
 }
 
 /*
     Reusable styles
  */
+
+.top-spaced {
+  margin-top: 1em;
+}
 
 .bottom-spaced {
   margin-bottom: 1em;
@@ -20,20 +24,25 @@
 
 .Navigation {
   width: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  font-size: 1em;
-  background-color: #f3f3f3;
-  padding-top: 1em;
-  padding-bottom: 1em;
+  background-color: #4b7bb2;
+  font-size: 1.75em;
+}
+
+.Navigation-Desktop {
+  width: 100%;
+  background-color: #4b7bb2;
+  font-size: 1.75em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.Navigation-Mobile {
+  background-color: #4b7bb2;
+  width: 100vw;
 }
 
 .Navigation-Content {
   margin: 0 auto;
-  padding-top: 0.5em;
-  padding-left: 0.5em;
-  padding-right: 0.5em;
   display: flex;
   justify-content: space-between;
   width: 75%;
@@ -42,86 +51,63 @@
 }
 
 .Navigation-Link {
-  color: #555;
+  color: #fff;
   text-decoration: none;
   font-weight: bold;
-  margin-right: 1.5em;
-  padding: 10px 0.5em 10px 0;
-}
-
-.Navigation p {
-  display: inline;
-  color: #555;
-  font-size: 1.5em;
-  font-weight: 500;
+  font-family: arvo, serif;
 }
 
 .Navigation-Button-Area {
-  padding-top: 0.25em;
-  padding-bottom: 0.25em;
-  font-size: 1.5em;
+  align-self: center;
 }
 
 .Navigation-Link:visited {
-  color: #555;
+  color: #fff;
 }
 
 .Navigation-Link:hover {
-  color: #ccc;
+  color: #eee;
 }
 
 .Navigation-Button {
   background-color: transparent;
   text-decoration: none;
-  color: #555;
+  color: #fff;
   border: none;
-  vertical-align: center;
+  padding: 0.25em 0.5em 0.35em;
+  border-radius: 0.25em;
+  margin-left: 0.5em;
   align-content: center;
-  justify-content: center;
 }
 
 .Navigation-Button:hover {
-  color: #ccc;
+  color: #fff;
+  background-color: #799bc2;
+  transition-duration: 200ms;
+}
+
+.Navigation-Button > span {
+  font-family: arvo, serif;
+  font-size: 0.6em;
+  font-weight: 600;
 }
 
 .Navigation-Button-Icon {
-  background-color: transparent;
-  text-decoration: none;
-  color: #555;
-  border: none;
-  align-self: center;
-  justify-content: center;
-  font-size: 1.25em;
-  margin-left: 0.25em;
-}
-
-.Navigation-Button-Icon-Alt {
   background-color: transparent;
   text-decoration: none;
   color: inherit;
   border: none;
   align-self: center;
   justify-content: center;
-  font-size: 1.5em;
-  margin-left: 0.25em;
-}
-
-.Navigation-Button-Icon:hover {
-  color: #ccc;
+  margin-left: 0.35em;
 }
 
 .navbar {
-  color: #555;
-  position: fixed;
+  background-color: #4b7bb2;
+  color: #fff;
   width: 100%;
-  left: 0;
-  max-width: 800px;
-  min-width: 390px;
-  top: 0;
   margin: auto;
-  align-self: center;
-  background-color: #fff;
-  padding: 0.75em 0.75em 2em;
+  padding: 1em 0 1em;
 }
 
 .navbar img {
@@ -130,23 +116,25 @@
 
 .navbar-toggler {
   margin-right: 10px;
-  color: #555;
+  color: #fff;
+}
+
+.nav-link {
+  font-family: arvo, serif;
+  font-size: 0.8em;
+  font-weight: 600;
 }
 
 .navbar-collapse {
   text-align: right;
-  padding: 2em;
+  padding: 1em;
   margin-left: -1em;
   margin-top: 1em;
   border-bottom-right-radius: 0.5em;
   border-bottom-left-radius: 0.5em;
-  color: #555;
-  background-color: #fff;
+  color: #fff;
+  background-color: #4b7bb2;
   z-index: 9999;
-}
-
-.Brand-Items b {
-  margin-left: 10px;
 }
 
 .Brand-Items {
@@ -155,7 +143,8 @@
 
 .Expanding-Nav-Link-Icon {
   margin-left: 1em;
-  color: #555;
+  color: #fff;
+  font-size: 1.5em;
 }
 
 /*
@@ -165,8 +154,7 @@
 .Content {
   background-color: #f3f3f3;
   font-size: 1.5em;
-  color: #555;
-  height: 100vh;
+  color: #777;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -185,64 +173,62 @@
 }
 
 .Content-Header {
-  padding: 0.5em 2em;
-  background-color: #de354c;
-  border-top-right-radius: 0.5em;
-  border-top-left-radius: 0.5em;
-  color: #fff;
-}
-
-.Content-Header h3 {
-  padding-top: 0.5em;
+  padding: 0.5em;
+  text-align: center;
+  color: #777;
 }
 
 .Content-Card {
-  background-color: rgba(131, 99, 66, 0.1);
   width: 100%;
-  padding: 2em;
-  padding-top: 1em;
-  border-bottom-left-radius: 0.5em;
-  border-bottom-right-radius: 0.5em;
+  margin-bottom: 1em;
 }
 
 /*
     Button and link styles
  */
 
-.btn-flat {
-  background-color: #555;
-}
-
 .light-button {
-  background-color: #eee;
+  background-color: #7799c0;
   border: 1px solid #ccc;
-  color: #555;
+  color: #fff;
+  padding: 0.75em 1.5em;
+  transition-duration: 150ms;
 }
 
 .light-button:hover {
-  background-color: #ddd;
-  border: 1px solid #bbb;
-  color: #555;
+  background-color: #3f6a9b;
+  border: 1px solid #ccc;
+  color: #fff;
+  transition-duration: 150ms;
 }
 
 .go-button {
   font-weight: bold;
-  background-color: #fff;
+  background-color: #7799c0;
   border: none;
-  color: #8abe75;
-  margin-top: 0.5em;
-  padding-top: 1em;
-  padding-bottom: 1em;
+  color: #fff;
+  margin-bottom: 1em;
+  width: 100%;
+  font-size: 1em;
 }
 
 .go-button:hover {
-  background-color: #8abe75;
+  background-color: #3f6a9b;
+  transition-duration: 150ms;
+}
+
+.go-button:hover > span {
+  padding-right: 1.5em;
+  transition-duration: 150ms;
+}
+
+.go-button > span {
+  padding-right: 1em;
+  transition-duration: 150ms;
 }
 
 .button-icon {
   font-size: 1.25em;
-  padding-bottom: 0.175em;
-  margin-left: 0.5em;
 }
 
 .shorten-button {
@@ -253,7 +239,7 @@
 }
 
 .Link {
-  color: #555;
+  color: #777;
   text-align: left;
 }
 
@@ -290,9 +276,9 @@
 }
 
 .custom-extension-prefix {
-  background-color: #eee;
-  border: 1px solid #ccc;
-  color: #555;
+  background-color: transparent;
+  color: #555555;
+  padding: 0.75em 1.5em;
 }
 
 /*
@@ -301,9 +287,6 @@
 
 .Footer {
   width: 100%;
-  position: absolute;
-  left: 0;
-  bottom: 0;
 }
 
 .Footer-Content {
@@ -314,4 +297,9 @@
 
 .Footer p {
   font-size: 0.5em;
+}
+
+
+.form-control {
+  padding: 0.75em 1.5em;
 }

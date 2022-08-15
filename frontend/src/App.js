@@ -56,7 +56,6 @@ function App() {
   async function onFormSubmit(urlData) {
     let url = urlData.url;
     const reqExt = urlData.reqExt;
-    const lifespan = urlData.lifespan;
 
     // URL validation
     if (isURL(url)) {
@@ -83,7 +82,6 @@ function App() {
         setLinkData({
           ext: response.data.ext,
           originalURL: url,
-          lifespan: lifespan,
         });
         setStatus(null);
         console.log('API response: ', response);
@@ -116,12 +114,12 @@ function App() {
   return (
     <div className="App">
       {
-        windowSize > 600 && <NavBar onDocClick={toggleDocModal}/>
+        windowSize > 700 && <NavBar onDocClick={toggleDocModal}/>
       }
       <div className="Content">
         <div>
           {
-            windowSize < 600 &&
+            windowSize < 700 &&
               <ExpandingNavBar onDocClick={toggleDocModal}/>
           }
         </div>

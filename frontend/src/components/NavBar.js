@@ -3,21 +3,15 @@ import {SiBuymeacoffee} from 'react-icons/si';
 
 const NavBar = ({onDocClick}) => {
   return (
-    <div className="Navigation">
+    <div className="Navigation-Desktop">
       <div className="Navigation-Content">
         <div>
           <a
             href="/"
             className="Navigation-Link"
           >
-            <img
-              src="/android-chrome-192x192.png"
-              alt="logo"
-              width={64}
-              height={64}
-            />
+            smlr
           </a>
-          <p>smlr</p>
         </div>
         <div className="Navigation-Button-Area">
           <a
@@ -25,18 +19,21 @@ const NavBar = ({onDocClick}) => {
             href="#"
             onClick={onDocClick}
           >
-            API <FaBook className="Navigation-Button-Icon-Alt" />
+            <span>API</span>
+            <FaBook className="Navigation-Button-Icon" />
           </a>
           <a
-            className="Navigation-Button-Icon"
+            className="Navigation-Button"
             href="https://github.com/noahcorona/url-shortener"
           >
+            <span>Github</span>
             <FaGithub className="Navigation-Button-Icon" />
           </a>
           <a
-            className="Navigation-Button-Icon"
+            className="Navigation-Button"
             href="https://buymeacoffee.com/4IeSH91kr"
           >
+            <span>Donate</span>
             <SiBuymeacoffee className="Navigation-Button-Icon" />
           </a>
         </div>

@@ -4,7 +4,7 @@ import QRCode from 'react-qr-code';
 import {FaClipboard} from 'react-icons/fa';
 
 const ShortURLArea = ({status, linkData, setLinkData}) => {
-  const {ext, originalURL, lifespan} = linkData;
+  const {ext, originalURL} = linkData;
   const [copied, setCopied] = useState(false);
 
   const shortURL = 'https://smlr.org/' + ext;
@@ -37,18 +37,6 @@ const ShortURLArea = ({status, linkData, setLinkData}) => {
     }
   }
 
-  /**
-   * Convert lifespan value to appropriate text
-   * @return {string|*}
-   */
-  function getLifespanText() {
-    if (lifespan === '0') {
-      return 'forever';
-    } else {
-      return lifespan;
-    }
-  }
-
   if (status === null && linkData.ext) {
     return (
       <>
@@ -77,11 +65,6 @@ const ShortURLArea = ({status, linkData, setLinkData}) => {
                   {shortURL}
                 </a>
               </h3>
-              <p>
-                {getLifespanText() === 'forever' ?
-                  'This link has no expiration date' :
-                  'This link expires in ' + getLifespanText()}
-              </p>
               <InputGroup>
                 <Form.Control
                   onFocus={handleFocus}

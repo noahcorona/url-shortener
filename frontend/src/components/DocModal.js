@@ -9,7 +9,7 @@ const DocModal = ({show, handleClose}) => {
       backdrop="static"
     >
       <Modal.Header closeButton>
-        <Modal.Title>Using the smlr URL creation API</Modal.Title>
+        <Modal.Title>URL Shortener API</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <h4>Making a Request</h4>
