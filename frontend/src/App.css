@@ -29,16 +29,18 @@
 }
 
 .Navigation-Desktop {
-  width: 100%;
+  width: 100vw;
   background-color: #4b7bb2;
-  font-size: 1.75em;
+  font-size: 1.25em;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
+  margin-bottom: 1em;
 }
 
 .Navigation-Mobile {
   background-color: #4b7bb2;
   width: 100vw;
+  margin-bottom: 1em;
 }
 
 .Navigation-Content {
@@ -48,6 +50,7 @@
   width: 75%;
   min-width: 350px;
   max-width: 800px;
+  font-size: 1.5em;
 }
 
 .Navigation-Link {
@@ -108,6 +111,7 @@
   width: 100%;
   margin: auto;
   padding: 1em 0 1em;
+  font-size: 1.5em;
 }
 
 .navbar img {
@@ -115,7 +119,7 @@
 }
 
 .navbar-toggler {
-  margin-right: 10px;
+  margin-right: 1em;
   color: #fff;
 }
 
@@ -129,7 +133,7 @@
   text-align: right;
   padding: 1em;
   margin-left: -1em;
-  margin-top: 1em;
+  margin-top: 0.5em;
   border-bottom-right-radius: 0.5em;
   border-bottom-left-radius: 0.5em;
   color: #fff;
@@ -138,7 +142,7 @@
 }
 
 .Brand-Items {
-  font-size: 1em;
+  font-size: 1.25em;
 }
 
 .Expanding-Nav-Link-Icon {
@@ -153,23 +157,19 @@
 
 .Content {
   background-color: #f3f3f3;
-  font-size: 1.5em;
   color: #777;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .Content-Centered {
   margin: auto;
-  width: 75%;
-  min-width: 350px;
-  max-width: 800px;
+  width: 80vw;
+  min-width: 300px;
+  max-width: 500px;
   display: block;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 .Content-Header {
@@ -180,12 +180,25 @@
 
 .Content-Card {
   width: 100%;
-  margin-bottom: 1em;
+  padding-bottom: 1em;
 }
 
 /*
     Button and link styles
  */
+
+.image-copy-button {
+  display: inline-block;
+  margin-left: 1em;
+  height: min-content;
+  width: 150px;
+  padding: 1em 0;
+  align-self: center;
+  background-color: #7799c0;
+  border: 1px solid #ccc;
+  color: #fff;
+  transition-duration: 150ms;
+}
 
 .light-button {
   background-color: #7799c0;
@@ -209,7 +222,9 @@
   color: #fff;
   margin-bottom: 1em;
   width: 100%;
-  font-size: 1em;
+  font-size: 1.5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
 }
 
 .go-button:hover {
@@ -251,13 +266,15 @@
     URL entry card styles
  */
 
-.QR-Area {
-  align-self: center;
-  text-align: center;
-}
-
 .error-text {
+  padding: 0.5em 1em;
+  margin-top: 2em;
   color: #d36666;
+  font-weight: normal;
+  font-size: 1em;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 0.25em;
 }
 
 .input-label {
@@ -282,6 +299,29 @@
 }
 
 /*
+    Short URL area styles
+ */
+
+.Short-URL-Area {
+
+}
+
+.Short-URL-Main-Area {
+  flex: 1;
+  align-content: end;
+}
+
+.Short-URL-Main-Area h3 {
+  margin-bottom: 0.5em;
+}
+
+.Short-URL-QR-Area {
+  display: flex;
+  margin: 2em 0;
+  justify-content: center;
+}
+
+/*
     Footer styles
  */
 
@@ -290,9 +330,10 @@
 }
 
 .Footer-Content {
-  width: 75%;
-  max-width: 800px;
+  min-width: 300px;
+  max-width: 500px;
   margin: auto;
+  font-size: 1.5em;
 }
 
 .Footer p {
@@ -302,4 +343,18 @@
 
 .form-control {
   padding: 0.75em 1.5em;
+}
+
+.form-label {
+  color: #555;
+  font-size: 1.1em;
+}
+
+/*
+    Waiting area styles
+ */
+
+.waiting-area {
+  justify-content: center;
+  margin-bottom: 4em;
 }

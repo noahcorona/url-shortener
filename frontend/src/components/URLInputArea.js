@@ -13,6 +13,7 @@ const URLInputArea = (props) => {
 
     // reset input and call the url form handler
     setUrl('');
+    setReqExt('');
     props.onFormSubmit({url, reqExt});
   };
 
@@ -25,19 +26,23 @@ const URLInputArea = (props) => {
     setUrl(text);
   };
 
-  if (!props.linkData) {
+  if (!props.linkData && props.status !== 'waiting') {
     return (
-      <div>
-        <div
-          data-testid="urlInputElement"
-          id="url-input-area"
-          className="Content-Card"
+      <div
+        data-testid="urlInputElement"
+        id="url-input-area"
+        className="Content-Card"
+      >
+        <Form
+          className="url-form"
+          onSubmit={submitHandler}
         >
-          <InputGroup className="top-spaced bottom-spaced">
+          <Form.Label>Enter a URL to shorten</Form.Label>
+          <InputGroup className="bottom-spaced">
             <Form.Control
               id="url"
               type="text"
-              placeholder="https://yoururl.com/"
+              placeholder="example.com/link-to-shorten"
               onChange={(e) => {
                 setUrl(e.target.value);
               }}
@@ -51,38 +56,37 @@ const URLInputArea = (props) => {
               <FaPaste className="button-icon"/>
             </Button>
           </InputGroup>
-          {props.status && props.status !== 'waiting' && props.linkData &&
-            <h3 className="error-text">{props.status}</h3>
-          }
-          <Form
-            className="url-form"
-            onSubmit={submitHandler}
-          >
-            <InputGroup className="bottom-spaced">
-              <InputGroup.Text className="custom-extension-prefix">
+          <Form.Label>{'Pick an alias'}</Form.Label>
+          <InputGroup className="bottom-spaced">
+            <InputGroup.Text className="custom-extension-prefix">
                   smlr.org/
-              </InputGroup.Text>
-              <Form.Control
-                id="reqExt"
-                type="text"
-                placeholder="alias"
-                onChange={(e) => {
-                  setReqExt(e.target.value);
-                }}
-                className="italic"
-                value={reqExt}
-              />
-            </InputGroup>
-            <Button
-              type="submit"
-              variant="secondary"
-              className="go-button"
-            >
-              <span>Create URL</span>
-              <BsArrowRight />
-            </Button>
-          </Form>
-        </div>
+            </InputGroup.Text>
+            <Form.Control
+              id="reqExt"
+              type="text"
+              placeholder="alias"
+              onChange={(e) => {
+                setReqExt(e.target.value);
+              }}
+              className="italic"
+              value={reqExt}
+            />
+          </InputGroup>
+          {props.error &&
+              <div className="error-text">
+                <b>Error: </b>
+                {props.error}
+              </div>
+          }
+          <Button
+            variant="secondary"
+            className="go-button top-spaced"
+            onClick={submitHandler}
+          >
+            <span>Create URL</span>
+            <BsArrowRight />
+          </Button>
+        </Form>
       </div>
     );
   } else {

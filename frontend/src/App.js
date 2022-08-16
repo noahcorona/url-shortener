@@ -27,6 +27,7 @@ function App() {
   const [modalShowing, setModalShowing] = useState(false);
   const [linkData, setLinkData] = useState(null);
   const [status, setStatus] = useState(null);
+  const [error, setError] = useState(null);
   const [windowSize, setWindowSize] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -87,18 +88,19 @@ function App() {
         console.log('API response: ', response);
       })
           .catch((error) => {
-            if (error.response) {
-              setStatus('Sorry! Looks like there\'s been an error' +
-                  ' on our part.');
+            if (error.response.status === 400) {
+              setError(error.response.data);
             } else if (error.request) {
-              setStatus('Sorry! Our server isn\'t responding.');
+              setError('Sorry! Our server isn\'t responding.');
             } else {
-              setStatus('Oops! It looks like the request was malformed. ');
+              setError('Oops! It looks like the request was malformed. ');
             }
-            console.log('API response (error): ', error);
+
+            setStatus(null);
           });
     } else {
-      setStatus('Oops. That doesn\'t look like a URL!');
+      setError('Oops. That doesn\'t look like a URL!');
+      setStatus(null);
     }
   }
 
@@ -113,14 +115,12 @@ function App() {
 
   return (
     <div className="App">
-      {
-        windowSize > 700 && <NavBar onDocClick={toggleDocModal}/>
-      }
       <div className="Content">
         <div>
           {
-            windowSize < 700 &&
-              <ExpandingNavBar onDocClick={toggleDocModal}/>
+            windowSize < 700 ?
+              <ExpandingNavBar onDocClick={toggleDocModal}/> :
+              <NavBar onDocClick={toggleDocModal}/>
           }
         </div>
         <DocModal
@@ -129,6 +129,7 @@ function App() {
         />
         <div className="Content-Centered">
           <URLInputArea
+            error={error}
             status={status}
             setStatus={setStatus}
             linkData={linkData}

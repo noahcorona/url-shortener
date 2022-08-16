@@ -1,27 +1,42 @@
 import {useState} from 'react';
 import {Button, Form, InputGroup} from 'react-bootstrap';
 import QRCode from 'react-qr-code';
-import {FaClipboard} from 'react-icons/fa';
+import {FaCopy} from 'react-icons/fa';
+import {BsArrowRight} from 'react-icons/bs';
 
 const ShortURLArea = ({status, linkData, setLinkData}) => {
-  const {ext, originalURL} = linkData;
+  const {ext} = linkData;
   const [copied, setCopied] = useState(false);
+  const [copiedImage, setCopiedImage] = useState(false);
 
   const shortURL = 'https://smlr.org/' + ext;
 
   const handleFocus = (event) => event.target.select();
 
-  const handleCopyClick = () => {
-    copyTextToClipboard(shortURL)
-        .then(() => {
-          setCopied(true);
-          setTimeout(() => {
-            setCopied(false);
-          }, 1500);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+  const handleCopyClick = (image) => {
+    if (image) {
+      copyTextToClipboard(shortURL)
+          .then(() => {
+            setCopiedImage(true);
+            setTimeout(() => {
+              setCopiedImage(false);
+            }, 1500);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+    } else {
+      copyTextToClipboard(shortURL)
+          .then(() => {
+            setCopied(true);
+            setTimeout(() => {
+              setCopied(false);
+            }, 1500);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+    }
   };
 
   /**
@@ -39,80 +54,63 @@ const ShortURLArea = ({status, linkData, setLinkData}) => {
 
   if (status === null && linkData.ext) {
     return (
-      <>
-        <div
-          id="short-url-area"
-          className="Content-Card"
-        >
-          <div className="d-flex justify-content-between gap-5">
-            <div className='bottom-spaced'>
-              <h3>
-                <a
-                  className="Link"
-                  href={originalURL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {originalURL}
-                </a>
-                {' > '}
-                <a
-                  className="Link"
-                  href={shortURL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {shortURL}
-                </a>
-              </h3>
-              <InputGroup>
-                <Form.Control
-                  onFocus={handleFocus}
-                  type="text"
-                  value={shortURL}
-                  readOnly
-                />
-                <Button
-                  variant="secondary"
-                  className="light-button"
-                  onClick={handleCopyClick}
-                >
-                  {copied ? 'Copied to Clipboard' : (
-                    <>Copy<FaClipboard className="button-icon" /></>
-                  )}
-                </Button>
-              </InputGroup>
-            </div>
-            <div className="QR-Area d-grid gap-2">
-              {
-                shortURL && (
-                  <QRCode
-                    className="centered"
-                    value={shortURL}
-                    alt={shortURL}
-                  />
-                )
-              }
-              <Button
-                variant="secondary"
-                className="d-block light-button bottom-spaced"
-              >
-                Copy image
-                <FaClipboard className="button-icon" />
-              </Button>
-            </div>
-          </div>
-          <div className="d-grid gap-2">
+      <div
+        id="short-url-area"
+        className="Short-URL-Area"
+      >
+        <div className='Short-URL-Main-Area'>
+          <h3>{shortURL}</h3>
+          <InputGroup>
+            <Form.Control
+              onFocus={handleFocus}
+              type="text"
+              value={shortURL}
+              readOnly
+            />
             <Button
               variant="secondary"
-              className="d-block go-button"
-              onClick={() => setLinkData(null)}
+              className="light-button"
+              onClick={() => handleCopyClick(false)}
             >
-              Make another short URL
+              {
+                  copied ? 'Copied to Clipboard' : (
+                    <FaCopy className="button-icon" />
+                  )
+              }
             </Button>
-          </div>
+          </InputGroup>
         </div>
-      </>
+        <div className="Short-URL-QR-Area">
+          {
+            shortURL && (
+              <QRCode
+                size={115}
+                value={shortURL}
+                alt={shortURL}
+              />
+            )
+          }
+          <Button
+            variant="secondary"
+            className="image-copy-button"
+            onClick={() => handleCopyClick(true)}
+          >
+            {
+                copiedImage ? 'Copied image to clipboard' : (
+                  <FaCopy className="button-icon" />
+                )
+            }
+          </Button>
+        </div>
+        <Button
+          variant="secondary"
+          className="d-block go-button"
+          onClick={() => setLinkData(null)}
+        >
+          <span>Make another URL</span>
+          <BsArrowRight />
+        </Button>
+      </div>
     );
   } else {
     return <div />;
