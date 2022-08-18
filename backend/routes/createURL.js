@@ -1,7 +1,7 @@
 const Express = require('express');
 const router = Express.Router();
 const shortid = require('shortid');
-const Filter = require("bad-words");
+const Filter = require('bad-words');
 const urlDB = require('../models/URL');
 
 // Validate URL string and check for profanity
@@ -33,11 +33,14 @@ router.post('/create', async (req, res) => {
 
   let ext = '';
 
-  if(reqExt === null) {
+  if(reqExt === null || reqExt === undefined) {
     // generate an extension with no profanity that is not taken in MongoDB
-    ext = shortid.generate();
-    while(await isProfane(ext) || await urlDB.findOne({ext: ext})) {
+    let idIsOkay = false;
+    while(!idIsOkay) {
       ext = shortid.generate()
+      let profane = await isProfane(ext);
+      let exists = await urlDB.findOne({ext: ext});
+      idIsOkay = !profane && !exists;
     }
   } else {
     // check the requested extension for profanity or route names

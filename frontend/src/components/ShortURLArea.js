@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useRef, useState} from 'react';
 import {Button, Form, InputGroup} from 'react-bootstrap';
 import QRCode from 'react-qr-code';
 import {FaCopy} from 'react-icons/fa';
@@ -9,13 +9,16 @@ const ShortURLArea = ({status, linkData, setLinkData}) => {
   const [copied, setCopied] = useState(false);
   const [copiedImage, setCopiedImage] = useState(false);
 
+  const imgCopyBtnRef = useRef(null);
+
   const shortURL = 'https://smlr.org/' + ext;
 
   const handleFocus = (event) => event.target.select();
 
   const handleCopyClick = (image) => {
     if (image) {
-      copyTextToClipboard(shortURL)
+      const qrCanvas = document.querySelector('.qr-code > canvas');
+      copyImgToClipboard(qrCanvas.toDataURL())
           .then(() => {
             setCopiedImage(true);
             setTimeout(() => {
@@ -52,6 +55,19 @@ const ShortURLArea = ({status, linkData, setLinkData}) => {
     }
   }
 
+  /**
+   *
+   * @param {any} image - the image to copy
+   * @return {Promise<boolean|void>} - boolean promise
+   */
+  async function copyImgToClipboard(image) {
+    if ('clipboard' in navigator) {
+      return await navigator.clipboard.write(image);
+    } else {
+      return document.execCommand('copy', true, image);
+    }
+  }
+
   if (status === null && linkData.ext) {
     return (
       <div
@@ -84,6 +100,7 @@ const ShortURLArea = ({status, linkData, setLinkData}) => {
           {
             shortURL && (
               <QRCode
+                className="qr-code"
                 size={115}
                 value={shortURL}
                 alt={shortURL}
@@ -93,6 +110,7 @@ const ShortURLArea = ({status, linkData, setLinkData}) => {
           <Button
             variant="secondary"
             className="image-copy-button"
+            ref={imgCopyBtnRef}
             onClick={() => handleCopyClick(true)}
           >
             {
