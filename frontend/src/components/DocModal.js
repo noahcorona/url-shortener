@@ -11,44 +11,70 @@ const DocModal = ({show, handleClose}) => {
       <Modal.Header closeButton>
         <Modal.Title>URL Shortener API</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <h4>Making a Request</h4>
-        <pre>
-          <b>URL:</b> https://api.smlr.org/create<br />
-          <b>Type:</b> POST<br />
-          <code><b>Body (JSON):</b><br /></code>
-        </pre>
-        <JSONPretty id="json-pretty" data={{destination: 'https://yourlinkhere.com'}} />
-        <h6>cURL example</h6>
+      <Modal.Body className="Doc-Modal-Body">
+        <h4>Request Shortened URL (POST)</h4>
+        <p><b>URL:</b> https://api.smlr.org/create</p>
+        <p><b>Body (JSON):</b></p>
+        <JSONPretty id="json-pretty" data={{
+          destination: 'https://yourlinkhere.com',
+          reqExt: 'your-alias',
+        }} />
+        <p>
+          <b>JSON property #1: destination</b><br />
+          {'The URL to shorten. For example, '}
+          &quot;<i>mysite.com/img/123456.png</i>&quot;
+        </p>
+        <p>
+          <b>JSON property #2: reqExt (optional)</b><br />
+          {'The requested extension, or URL alias. For example, '}
+          &quot;<i>ShortLink</i>&quot;
+          {' to redirect smlr.org/ShortLink to your chosen destination.'
+          }
+        </p>
+        <h5>Example: Post via cURL</h5>
         <pre>
           <code>curl -X POST -F {'{"destination": "https://example.com"}'} https://api.smlr.org/create</code>
         </pre>
-        <h6>Javascript example using Axios</h6>
+        <h5>Example: Post via JavaScript with Axios</h5>
         <pre>
-          <code>{'async function getShortURL(url) {\n' +
-              '  axios.post(\'/create\', {\n' +
-              '      destination: url,\n' +
-              '  }).then((response) => {\n' +
-              '      const {shortened, destination, ext, ' +
-              'date, redirects} = response.data;\n\n' +
-              '      // handle the data here - for example...\n' +
-              '      console.log(\'The URL\', destination, \n' +
-              '                  \'was shortened to\', shortened,\n' +
-              '                  \'at\', date, \n' +
-              '                  \'and was given an ' +
-              'extension of\', ext' + ',\n' +
-              '                  \'. The short url has been used' +
-              '\', redirects, \'times.\');\n' +
-              '  })\n' +
-              '}'}
+          <code>
+            {'async function getShortURL(url, alias) {\n' +
+             '  axios.post(\'/create\', {\n' +
+             '      destination: url,\n' +
+             '      reqExt: alias,\n' +
+             '  }).then((response) => {\n' +
+             '      const {shortened, destination, ext, ' +
+             'date} = response.data;\n\n' +
+             '      // handle the data here - for example...\n' +
+             '      console.log(\'The URL\', destination, \n' +
+             '                  \'was shortened to\', shortened,\n' +
+             '                  \'at\', date, \n' +
+             '                  \'and was given an ' +
+             'extension/alias of\', ext)\n' +
+             '  })\n' +
+             '}'
+            }
           </code>
         </pre>
-        <h6>Python example</h6>
-        <p>Code here</p>
-        <h3>Parsing a Response</h3>
+        <h5>Example: Post via Python with the requests library</h5>
         <pre>
-          <code><b>Data (JSON):</b><br /></code>
+          <code>
+            {'import requests\n\n' +
+             'apiURL = \'https://api.smlr.org/create\'\n' +
+             'longURL = \'https://longurlhere.com\'\n' +
+             'alias = \'myalias\' # optional, generated if not provided\n' +
+             'body = {\'destination\': longURL, \'reqExt\': alias}\n' +
+             'res = requests.post(apiURL, json = body).json()\n\n' +
+             '# handle the data here - for example...\n' +
+             'print(\'The URL\', res[\'destination\'], \n' +
+             '      \'was shortened to\', res[\'shortened\'],\n' +
+             '      \'at\', res[\'date\'], \n' +
+             '      \'and was given an extension/alias of\', res[\'ext\'])'
+            }
+          </code>
         </pre>
+        <h3>Parsing a Response</h3>
+        <b>Data (JSON):</b>
         <JSONPretty id="json-pretty" data={{
           destination: 'https://yourlinkhere.com',
         }} />
