@@ -1,37 +1,56 @@
 import {QRCodeCanvas} from 'qrcode.react';
 import {Button} from 'react-bootstrap';
-import {FaCopy} from 'react-icons/fa';
+import {FaCopy, FaShare} from 'react-icons/fa';
 import {useState} from 'react';
+import {copyBlobToClipboard} from 'copy-image-clipboard';
+import {isMobile} from 'react-device-detect';
 
 const CopyableQRCode = (props) => {
   const [copied, setCopied] = useState(false);
 
-  const handleCopyClick = () => {
-    copyImgToClipboard()
-        .then(() => {
-          setCopied(true);
-          setTimeout(() => {
-            setCopied(false);
-          }, 1500);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+  const handleShareClick = async () => {
+    const canvas = document.querySelector('.qr-code > canvas');
+    const dataURL = canvas.toDataURL();
+    const data = await fetch(dataURL);
+    const blob = await data.blob();
+
+    const filesArray = [
+      new File(
+          [blob],
+          `${props.shortURL}.png`,
+          {
+            type: blob.type,
+            lastModified: new Date().getTime(),
+          },
+      ),
+    ];
+
+    const shareData = {
+      files: filesArray,
+    };
+
+    try {
+      await navigator.share(shareData);
+    } catch (err) {
+      console.error('Error sharing image:', err);
+      alert(err);
+    }
   };
 
-  const copyImgToClipboard = async () => {
+  const handleCopyClick = async () => {
     const canvas = document.querySelector('.qr-code > canvas');
     const image = canvas.toDataURL('image/png');
     const data = await fetch(image);
     const blob = await data.blob();
 
-    const item = new window.ClipboardItem({'image/png': blob});
-    await navigator.clipboard.write([item])
-        .then(function() {
-          console.log('Copied to clipboard');
-        }, (error) => {
-          console.error('Error:', error);
-        });
+    copyBlobToClipboard(blob).then(() => {
+      setCopied(true);
+      setTimeout(() => {
+        setCopied(false);
+      }, 1500);
+    }).catch((err) => {
+      console.log(err);
+    });
   };
 
   return (
@@ -47,17 +66,35 @@ const CopyableQRCode = (props) => {
           </div>
         )
       }
-      <Button
-        variant="secondary"
-        className="image-copy-button"
-        onClick={() => handleCopyClick()}
-      >
-        {
-          copied ? 'Copied image to clipboard' : (
-                <FaCopy className="button-icon" />
-            )
-        }
-      </Button>
+
+      {
+          isMobile ? (
+                  <Button
+                    variant="secondary"
+                    className="image-copy-button"
+                    onClick={() => handleShareClick()}
+                  >
+                    {
+                      (copied ? 'Sharing image' : (
+                              <FaShare className="button-icon" />
+                          )
+                      )
+                    }
+                  </Button>
+              ) :
+              <Button
+                variant="secondary"
+                className="image-copy-button"
+                onClick={() => handleCopyClick()}
+              >
+                {
+                  (copied ? 'Copied image to clipboard' : (
+                          <FaCopy className="button-icon" />
+                      )
+                  )
+                }
+              </Button>
+      }
     </div>
   );
 };

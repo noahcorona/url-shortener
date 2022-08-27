@@ -144,6 +144,7 @@ function App() {
             setStatus={setStatus}
             linkData={linkData ? linkData : {}}
             setLinkData={setLinkData}
+            windowSize={windowSize}
           />
           <Footer />
         </div>

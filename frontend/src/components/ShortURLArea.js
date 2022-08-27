@@ -3,7 +3,7 @@ import {BsArrowRight} from 'react-icons/bs';
 import CopyableQRCode from './CopyableQRCode';
 import CopyableText from './CopyableText';
 
-const ShortURLArea = ({status, linkData, setLinkData}) => {
+const ShortURLArea = ({status, linkData, setLinkData, windowSize}) => {
   const {ext} = linkData;
 
   const shortURL = 'https://smlr.org/' + ext;
@@ -18,7 +18,10 @@ const ShortURLArea = ({status, linkData, setLinkData}) => {
           <h3>{shortURL}</h3>
           <CopyableText shortURL={shortURL} />
         </div>
-        <CopyableQRCode shortURL={shortURL} />
+        <CopyableQRCode
+          shortURL={shortURL}
+          windowSize={windowSize}
+        />
         <Button
           variant="secondary"
           className="d-block go-button"
