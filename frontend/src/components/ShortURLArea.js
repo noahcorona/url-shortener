@@ -1,72 +1,12 @@
-import {useRef, useState} from 'react';
-import {Button, Form, InputGroup} from 'react-bootstrap';
-import QRCode from 'react-qr-code';
-import {FaCopy} from 'react-icons/fa';
+import {Button} from 'react-bootstrap';
 import {BsArrowRight} from 'react-icons/bs';
+import CopyableQRCode from './CopyableQRCode';
+import CopyableText from './CopyableText';
 
 const ShortURLArea = ({status, linkData, setLinkData}) => {
   const {ext} = linkData;
-  const [copied, setCopied] = useState(false);
-  const [copiedImage, setCopiedImage] = useState(false);
-
-  const imgCopyBtnRef = useRef(null);
 
   const shortURL = 'https://smlr.org/' + ext;
-
-  const handleFocus = (event) => event.target.select();
-
-  const handleCopyClick = (image) => {
-    if (image) {
-      const qrCanvas = document.querySelector('.qr-code > canvas');
-      copyImgToClipboard(qrCanvas.toDataURL())
-          .then(() => {
-            setCopiedImage(true);
-            setTimeout(() => {
-              setCopiedImage(false);
-            }, 1500);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-    } else {
-      copyTextToClipboard(shortURL)
-          .then(() => {
-            setCopied(true);
-            setTimeout(() => {
-              setCopied(false);
-            }, 1500);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-    }
-  };
-
-  /**
-   *
-   * @param {string} text - the text to copy
-   * @return {Promise<boolean|void>} - boolean promise
-   */
-  async function copyTextToClipboard(text) {
-    if ('clipboard' in navigator) {
-      return await navigator.clipboard.writeText(text);
-    } else {
-      return document.execCommand('copy', true, text);
-    }
-  }
-
-  /**
-   *
-   * @param {any} image - the image to copy
-   * @return {Promise<boolean|void>} - boolean promise
-   */
-  async function copyImgToClipboard(image) {
-    if ('clipboard' in navigator) {
-      return await navigator.clipboard.write(image);
-    } else {
-      return document.execCommand('copy', true, image);
-    }
-  }
 
   if (status === null && linkData.ext) {
     return (
@@ -76,50 +16,9 @@ const ShortURLArea = ({status, linkData, setLinkData}) => {
       >
         <div className='Short-URL-Main-Area'>
           <h3>{shortURL}</h3>
-          <InputGroup>
-            <Form.Control
-              onFocus={handleFocus}
-              type="text"
-              value={shortURL}
-              readOnly
-            />
-            <Button
-              variant="secondary"
-              className="light-button"
-              onClick={() => handleCopyClick(false)}
-            >
-              {
-                  copied ? 'Copied to Clipboard' : (
-                    <FaCopy className="button-icon" />
-                  )
-              }
-            </Button>
-          </InputGroup>
+          <CopyableText shortURL={shortURL} />
         </div>
-        <div className="Short-URL-QR-Area">
-          {
-            shortURL && (
-              <QRCode
-                className="qr-code"
-                size={115}
-                value={shortURL}
-                alt={shortURL}
-              />
-            )
-          }
-          <Button
-            variant="secondary"
-            className="image-copy-button"
-            ref={imgCopyBtnRef}
-            onClick={() => handleCopyClick(true)}
-          >
-            {
-                copiedImage ? 'Copied image to clipboard' : (
-                  <FaCopy className="button-icon" />
-                )
-            }
-          </Button>
-        </div>
+        <CopyableQRCode shortURL={shortURL} />
         <Button
           variant="secondary"
           className="d-block go-button"
